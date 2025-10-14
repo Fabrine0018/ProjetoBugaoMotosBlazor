@@ -1,0 +1,84 @@
+﻿@page "/CadastroFornecedor"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject FornecedorDAO fornecedorDAO;
+@inject NavigationManager Navigation;
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+
+<div class="border p-4 rounded">
+    <div class="breadcrumb ">
+        <a href="#">Home</a> > <a href="#">Cadastrar: Fornecedor</a>
+    </div>
+    <div class="border-left">
+        <h3>Cadastro do fornecedor</h3>
+        <p>Preencha todas as informações corretamente</p>
+    </div>
+
+    <EditForm Model="_novoFornecedor" OnSubmit="Salvar">
+        <input @bind-value="_novoFornecedor!.Nome" type="text" placeholder="Nome">
+
+        <div class="row">
+            <div><input @bind-value="_novoFornecedor!.TelefoneEmp" type="text" placeholder="Telefone"></div>
+            <div><input @bind-value="_novoFornecedor!.CNPJ" type="text" placeholder="CNPJ"></div>
+            <div><input @bind-value="_novoFornecedor!.NumeroCasaApt" type="text" placeholder="N casa/apto"></div>
+            <div><input @bind-value="_novoFornecedor!.Responsavel" type="text" placeholder="Responsável"></div>
+            <div><input @bind-value="_novoFornecedor!.RazaoSocial" type="text" placeholder="Razão Social"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row-3">
+            <div><input @bind-value="_novoFornecedor!.CEP" type="text" placeholder="CEP"></div>
+            <div>
+                <input @bind-value="_novoFornecedor!.Estado" type="text" placeholder="Estado">
+            </div>
+            <div>
+                <input @bind-value="_novoFornecedor!.Cidade" type="text" placeholder="Cidade">
+            </div>
+        </div>
+
+        <div class="row">
+            <div><input @bind-value="_novoFornecedor!.Rua" type="text" placeholder="Rua"></div>
+            <div><input @bind-value="_novoFornecedor!.Bairro" type="text" placeholder="Bairro"></div>
+        </div>
+
+        <textarea rows="4" placeholder="Complemento"> @_novoFornecedor!.Complemento -</textarea>
+
+        <div class="buttons">
+            <button type="submit" class="btn-salvar">Salvar</button>
+            <button class="btn-deletar">Deletar</button>
+        </div>
+
+    </EditForm>
+</div>
+
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Fornecedor? _novoFornecedor { get; set; } = new Fornecedor();
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novoFornecedor.CNPJ is null || _novoFornecedor.CNPJ == "")
+            {
+                throw new Exception("O campo CNPJ é obrigatório");
+            }
+            fornecedorDAO.InserirFornecedor(_novoFornecedor);
+            Navigation.NavigateTo("/ConsultaFornecedor");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+    }
+}

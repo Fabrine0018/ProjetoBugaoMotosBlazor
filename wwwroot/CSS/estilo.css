@@ -1,0 +1,29 @@
+﻿/* header */
+.nav-pills .nav-link.active {
+    background-color: transparent !important; /* remove fundo azul */
+    color: white !important; /* deixa o ícone/texto branco */
+}
+
+/*seta´para cima e baixo*/
+/* Transição padrão */
+.nav-link .bi-caret-down-fill {
+    transition: transform 0.3s;
+}
+
+/* Rotação quando expandido */
+.nav-link[aria-expanded="true"] .bi-caret-down-fill {
+    transform: rotate(180deg);
+}
+
+select {
+    padding-right: 32px; /* espaço extra à direita */
+    background-position: right 10px center; /* seta não colada na borda */
+    background-repeat: no-repeat;
+    background-size: 16px;
+}
+
+
+        
+.form-select {
+    padding-right: 2rem; 
+}

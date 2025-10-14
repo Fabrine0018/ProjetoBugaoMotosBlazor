@@ -1,0 +1,65 @@
+﻿@page "/ConsultaServico"
+
+@using AppBugaoMotoFVLE.Components.Models
+@inject ServicoDAO servicoDAO
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a>Consultar Serviço</a>
+    </div>
+    <div class="border p-4 rounded">
+        <h2>Consultar Serviço 🔍</h2>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+            <a href="/CadastroServico" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar Novo Serviço</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Serviço</th>
+                    <th>Código</th>
+                    <th>Prestador</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int contador = 1;
+                    @foreach (var servico in listaServico)
+                    {
+                        <tr>
+                            <td>@contador</td>
+                            <td>@servico.Nome</td>
+                            <td>@servico.Codigo</td>
+                            <td>@servico.Prestador</td>
+                            <td>@servico.Valor.ToString("C")</td>
+                            <td>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                            </td>
+                        </tr>
+                        contador++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<Servico> listaServico = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarServico();
+    }
+
+    private void CarregarServico()
+    {
+        listaServico = servicoDAO.ListarServico();
+    }
+}

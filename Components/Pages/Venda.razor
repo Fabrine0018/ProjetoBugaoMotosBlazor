@@ -1,0 +1,206 @@
+﻿@page "/venda"
+
+<div class="container-md pt-4 d-grid gap-4">
+    <h1 class="border-start ps-4"> Venda </h1>
+    <div class="container-fluid p-0">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a href="#AdicionarServico" class="nav-link active" id="linkServico" data-bs-toggle="tab" role="tab" 
+                aria-controls="tabServico">Adicionar Serviços</a>
+            </li>
+            <li class="nav-item">
+                <a href="#Produto" class="nav-link" id="linkProduto" data-bs-toggle="tab" role="tab" 
+                aria-controls="tabProduto">Adicionar Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a href="#Pagamento" class="nav-link" id="linkPagamento" data-bs-toggle="tab" role="tab" 
+                aria-controls="tabPagamento">Pagamento</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content" id="MeuConteudo">
+            <div id="AdicionarServico" class="tab-pane fade show active border" role="tabpanel" aria-labelledby="linkServico"> <br>
+                <div class="p-4 d-grid gap-4 pt-2">
+                    <div class="border-start ps-4">
+                        <h2>Adicionar Serviços</h2>
+                        <p> Selecione o tipo de serviço prestado, caso não tenha deixe em branco</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select name="NomeCliente" class="form-select" id="SelecionarCliente" >
+                                <option value="1">Troca de oléo</option>
+                                <option value="2">Troca de pneu</option>
+                                <option value="3">Troca de espelho</option>
+                            </select>
+                        </div>
+                        <div class="col-4 d-grid ">
+                            <button class="btn btn-success align-middle"> Adicionar Serviço </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <table class="table table-light table-hover table-striped">
+                                <thead class="border-bottom-4 border-dark">
+                                    <th scope="col-2">#</th>
+                                    <th scope="col-5">Serviço</th>
+                                    <th scope="col-4">Valor</th>
+                                    <th scope="col-1">Status</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Troca de oleo</td>
+                                        <td>R$ 30,00</td>
+                                        <td class="align-middle"><i class="bi bi-check-square-fill"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Troca de oleo</td>
+                                        <td>R$ 30,00</td>
+                                        <td class="d-flex align-middle"><i class="bi bi-check-square-fill"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-dark align-middle" style="width: 16em;"> Próximo <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Produto" class="tab-pane fade border" role="tabpanel" aria-labelledby="linkProduto"> <br>
+                <div class="p-4 d-grid gap-4 pt-2">
+                    <div class="border-start ps-4">
+                        <h2>Adicionar Produtos</h2>
+                        <p> Selecione os produtos usados ou vendidos, caso não tenha deixe em branco</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select name="NomeProduto" class="form-select" id="SelecionarProduto" >
+                                <option value="1">Oléo</option>
+                                <option value="2">Pneu</option>
+                                <option value="3">Espelho</option>
+                            </select>
+                        </div>
+                        <div class="col-4 d-grid ">
+                            <button class="btn btn-success align-middle"> Adicionar Produto </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <table class="table table-light table-hover table-striped">
+                                <thead class="border-bottom-4 border-dark">
+                                    <th scope="col-1">#</th>
+                                    <th scope="col-3">Produto</th>
+                                    <th scope="col-2">Quantidade</th>
+                                    <th scope="col-2">Valor Unitário</th>
+                                    <th scope="col-3">Valor Total</th>
+                                    <th scope="col-1">Status</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Oleo</td>
+                                        <td>2</td>
+                                        <td>R$30,00</td>
+                                        <td>R$60,00</td>
+                                        <td class="align-middle"><i class="bi bi-check-square-fill"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Pneu</td>
+                                        <td>1</td>
+                                        <td>R$130,00</td>
+                                        <td>R$130,00</td>
+                                        <td class="d-flex align-middle"><i class="bi bi-check-square-fill"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-dark align-middle" style="width: 16em;"> Próximo <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div id="Pagamento" class="tab-pane fade border" role="tabpanel" aria-labelledby="linkPagamento"><br>
+                <div class="p-4 d-grid gap-4 pt-2">
+                    <div class="border-start ps-4">
+                        <h2>Pagamento</h2>
+                        <p> Informe o tipo de pagamento</p>
+                    </div>
+                    <div class="d-grid gap-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="data" class="form-label">Data</label>
+                                <input class="form-control" type="date" name="data" id="dataVenda">
+                            </div>
+                            <div class="col-4">
+                                <label for="SelectClientes" class="form-label">Selecione o Cliente</label>
+                                <select name="NomeCliente" class="form-select" id="SelecionarCliente">
+                                    <option value="1">João</option>
+                                    <option value="2">Maria</option>
+                                    <option value="3">Viviane</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <input class="form-control" type="text" placeholder="Telefone" aria-label="Disabled input example" disabled>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type="text" placeholder="CPF" aria-label="Disabled input example" disabled>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type="text" placeholder="Endereço" aria-label="Disabled input example" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="SelectPagamento" class="form-label">Forma de Pagamento</label>
+                            <select name="NomeCliente" class="form-select" id="SelecionarCliente">
+                                <option value="1">PIX</option>
+                                <option value="2">Dinheiro</option>
+                                <option value="3">Cartão de Débito/Crédito</option>
+                                <option value="4">Transferência</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="chavePix" class="form-label">ChavePix</label>
+                            <input class="form-control" type="text" name="pix" id="ChavePIX">
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row border rounded">
+                            <div class="col-6 p-3 text-left">
+                                <p>Valor Total dos Serviços: </p>
+                                <p>Valor Total dos Produtos:</p>
+                                <hr>
+                                <p>Valor Total:</p>
+                            </div>
+                            <div class="col-6 p-3 text-end ">
+                                <p>R$480,00</p>
+                                <p>R$480,00</p>
+                                <hr>
+                                <p>R$480,00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <button class="btn btn-dark p-2 align-middle" style="width: 100%;"> <i class="bi bi-arrow-left"></i> Voltar </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-success p-2 align-middle" style="width: 100%;"> Finalizar compra <i class="bi bi-bag-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

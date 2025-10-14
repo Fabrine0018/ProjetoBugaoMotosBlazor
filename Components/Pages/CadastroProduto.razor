@@ -1,0 +1,62 @@
+﻿@page "/CadastroProduto"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ProdutoDAO produtoDAO;
+@inject NavigationManager Navigation;
+
+@if (erro != null)
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+<div class="border p-4 rounded">
+    <div class="breadcrumb ">
+        <a href="#">Home</a> > <a href="#">Cadastrar: Produto</a>
+    </div>
+    <div class="border-left">
+        <h3>Cadastro do produto</h3>
+        <p>Preencha todas as informações corretamente</p>
+    </div>
+
+    <EditForm Model="_novoProduto" OnSubmit="Salvar">
+        <input @bind-value="_novoProduto!.Nome" type="text" placeholder="Nome do Produto">
+
+        <div class="row">
+            <div><input @bind-value="_novoProduto!.Codigo" type="text" placeholder="Código"></div>
+            <div><input @bind-value="_novoProduto!.Quantidade" type="number" placeholder="Quantidade"></div>
+            <div><input @bind-value="_novoProduto!.Valor" type="number" step="0.01" placeholder="Valor (R$)"></div>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="btn-salvar">Salvar</button>
+            <button class="btn-deletar">Deletar</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Produto? _novoProduto { get; set; } = new Produto();
+
+    private void Salvar(EditContext context)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(_novoProduto.Nome))
+            {
+                throw new Exception("O campo Nome é obrigatório");
+            }
+
+            produtoDAO.InserirProduto(_novoProduto);
+            Navigation.NavigateTo("/Estoque");
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+    }
+
+}

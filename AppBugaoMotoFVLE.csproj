@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AppBugaoMotoFVLE</RootNamespace>
+    <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\Pages\CadastroCliente.razor.razor" />
+    <Content Remove="Components\Pages\ConsultaCliente.razor.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Pages\Consss.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configs_BD\" />
+    <Folder Include="wwwroot\SCRIPT\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.4.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,65 @@
+﻿@page "/ConsultaFornecedor"
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject FornecedorDAO fornecedorDAO
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a>Consultar Fornecedor</a>
+    </div>
+    <div class="border p-4 rounded">
+        <h2>Consultar Fornecedor 🔍</h2>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+            <a href="/CadastroFornecedor" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar novo Fornecedor</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th> # </th>
+                    <th>Empresa</th>
+                    <th>Responsavel</th>
+                    <th>Contato</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int contador = 1;
+                    @foreach (var fornecedor in listaFornecedor)
+                    {
+                        <tr>
+                            <td> @contador </td>
+                            <td> @fornecedor.RazaoSocial </td>
+                            <td> @fornecedor.Responsavel </td>
+                            <td> @fornecedor.TelefoneEmp </td>
+                            <td>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                            </td>
+                        </tr>
+                        contador ++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private List<Fornecedor> listaFornecedor = new();
+
+
+    protected override void OnInitialized()
+    {
+        CarregarFornecedor();
+    }
+
+    private void CarregarFornecedor()
+    {
+        listaFornecedor = fornecedorDAO.ListarFornecedores();
+    }
+}
+

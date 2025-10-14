@@ -1,0 +1,66 @@
+﻿@page "/estoque"
+@inject ProdutoDAO ProdutoDAO
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a href="#"> Estoque </a>
+    </div>
+    <div class="border p-4 rounded">
+        <h2>Consultar Produto 🔍</h2>
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar">
+          <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+          <a href="/CadastroProduto" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar novo produto</a>
+        </div>
+        <table>
+            
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Código</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+                
+            
+               
+            <tbody>
+                @{
+                    int contador = 1;
+                    @foreach (var produto in ListarTodos)
+                    {
+                        <tr>
+                            <td>@produto.Nome</td>
+                            <td>@produto.Codigo</td>
+                            <td>@produto.Quantidade</td>
+                            <td>@produto.Valor</td>
+<td>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+
+</td>
+                           
+
+                        </tr>
+                        contador++;
+                    }
+                }
+
+                @code {
+                    private List<Produto> ListarTodos = new();
+
+
+                    protected override void OnInitialized()
+                    {
+                        CarregarProduto();
+                    }
+
+                    private void CarregarProduto()
+                    {
+                        ListarTodos = ProdutoDAO.ListarTodos();
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

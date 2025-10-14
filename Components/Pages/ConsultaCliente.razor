@@ -1,0 +1,66 @@
+﻿@page "/ConsultaCliente"
+
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ClienteDAO ClienteDAO
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a> Consultar Cliente </a>
+    </div>
+
+    <div class="border p-4 rounded">
+        <h2>Consultar Cliente 🔍</h2>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+            <a href="/CadastroCliente" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar novo cliente</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th># </th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Cpf</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int contador = 1;
+                    @foreach (var cliente in listaClie)
+                    {
+                        <tr>
+                            <td> @contador </td>
+                            <td>@cliente.Nome</td>
+                            <td>@cliente.Telefone</td>
+                            <td> @cliente.Cpf </td>
+                            <td>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                            </td>
+                        </tr>
+                        contador++;
+                    }
+                }
+
+                @code {
+                    private List<Cliente> listaClie = new();
+
+
+                    protected override void OnInitialized()
+                    {
+                        CarregarCliente();
+                    }
+
+                    private void CarregarCliente()
+                    {
+                        listaClie = ClienteDAO.ListarCliente();
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

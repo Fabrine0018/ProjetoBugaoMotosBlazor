@@ -1,0 +1,65 @@
+﻿@page "/CadastroServico"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ServicoDAO servicoDAO;
+@inject NavigationManager Navigation;
+
+@if (erro != null)
+
+{
+    <div class="alert alert-danger">
+        @erro
+    </div>
+}
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="#">Home</a> > <a href="#">Cadastrar: Serviço</a>
+    </div>
+    <div class="border p-4 rounded">
+        <div class="border-left">
+            <h3>Cadastro do serviço</h3>
+            <p>Preencha todas as informações corretamente</p>
+        </div>
+        <EditForm Model="_novoServico" OnSubmit="Salvar">
+            <input @bind-value="_novoServico!.Nome" type="text" placeholder="Nome do serviço">
+        <div class="row">
+                <div><input @bind-value="_novoServico!.Codigo"  type="text" placeholder="Código"></div>
+                <div><input @bind-value="_novoServico!.Prestador" type="text" placeholder="Prestador"></div>
+                <div><input @bind-value="_novoServico!.Valor"  type="text" placeholder="Valor do Serviço"></div>
+        </div>
+        <textarea rows="4" placeholder="Descrição"></textarea>
+        <div class="buttons">
+            <button type="submit" class="btn-salvar">Salvar</button>
+            <button class="btn-deletar">Deletar</button>
+        </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? erro = null;
+    [SupplyParameterFromForm]
+    private Servico? _novoServico { get; set; } = new Servico();
+
+    private void Salvar()
+    {
+        try
+        {
+            if (_novoServico.Prestador is null || _novoServico.Prestador == "")
+            {
+
+                throw new Exception("O campo Prestador é obrigatório");
+
+            }
+            servicoDAO.InserirServico(_novoServico);
+            Navigation.NavigateTo("/ConsultaServico");
+
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+        }
+
+    }
+}
