@@ -37,7 +37,7 @@
                             <td> @fornecedor.Responsavel </td>
                             <td> @fornecedor.TelefoneEmp </td>
                             <td>
-                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                                <button type="button" class="btn-view" data-bs-toggle="modal" data-bs-target="#fornecedorModal"><i class="fi fi-rr-eye"></i></button>
                             </td>
                         </tr>
                         contador ++;
@@ -45,6 +45,92 @@
                 }
             </tbody>
         </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="fornecedorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Empresa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @{
+                        foreach (var fornecedor in listaFornecedor)
+                        {
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="nome" class="mb-1">Nome da Empresa:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Nome" aria-label="nome" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="razaoSocial" class="mb-1">Razão Social:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.RazaoSocial" aria-label="razaoSocial" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="cidade" class="mb-1">Cidade:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Cidade" aria-label="cidade" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="estado" class="mb-1">Estado:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Estado" aria-label="estado" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="rua" class="mb-1">Rua:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Rua" aria-label="rua" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="bairro" class="mb-1">Bairro:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Bairro" aria-label="bairro" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 mb-3 mt-3">
+                                    <label for="telefoneEmp" class="mb-1"> Telefone da Empresa:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.TelefoneEmp" aria-label="telefoneEmp" />
+                                </div>
+                                <div class="col-4 mb-3 mt-3">
+                                    <label for="numeroCasaApt" class="mb-1"> Numero:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.NumeroCasaApt" aria-label="numeroCasaApt" />
+                                </div>
+                                <div class="col-4 mb-3 mt-3">
+                                    <label for="complemento" class="mb-1"> Complemento:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Complemento" aria-label="complemento" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="cep" class="mb-1">CEP:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.CEP" aria-label="cep" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="CNPJ" class="mb-1">CNPJ:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.CNPJ" aria-label="CNPJ" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="Responsavel" class="mb-1">Responsável:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.Responsavel" aria-label="Responsavel" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="telefoneRes" class="mb-1">Telefone Responsável:</label>
+                                    <input type="text" class="form-control" placeholder="@fornecedor.TelefoneRes" aria-label="telefoneRes" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Atualizar <i class="bi bi-arrow-counterclockwise"></i></button>
+                    <button type="button" class="btn btn-danger">Deletar <i class="bi bi-trash3"></i> </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

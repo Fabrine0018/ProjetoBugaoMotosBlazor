@@ -31,7 +31,7 @@
             <tbody>
                 @{
                     int contador = 1;
-                    @foreach (var cliente in listaClie)
+                    @foreach (var cliente in listaCliente)
                     {
                         <tr>
                             <td> @contador </td>
@@ -39,28 +39,97 @@
                             <td>@cliente.Telefone</td>
                             <td> @cliente.Cpf </td>
                             <td>
-                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                                <button type="button" class="btn-view" data-bs-toggle="modal" data-bs-target="#clienteModal"><i class="fi fi-rr-eye"></i></button>
                             </td>
                         </tr>
                         contador++;
                     }
                 }
 
-                @code {
-                    private List<Cliente> listaClie = new();
-
-
-                    protected override void OnInitialized()
-                    {
-                        CarregarCliente();
-                    }
-
-                    private void CarregarCliente()
-                    {
-                        listaClie = ClienteDAO.ListarCliente();
-                    }
-                }
             </tbody>
         </table>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="clienteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @{
+                        foreach (var cliente in listaCliente)
+                        {
+                            <div class="row">
+                                <div class="col-12 mb-3 mt-3">
+                                    <label for="nome" class="mb-1">Nome do Cliente:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Nome" aria-label="nome" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="telefone" class="mb-1">Telefone:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Telefone" aria-label="telefone"/>
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="CPF" class="mb-1">CPF:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Cpf" aria-label="CPF"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="cidade" class="mb-1">Cidade:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Cidade" aria-label="cidade" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="estado" class="mb-1">Estado:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Estado" aria-label="estado" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="rua" class="mb-1">Rua:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Rua" aria-label="rua" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="bairro" class="mb-1">Bairro:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Bairro" aria-label="bairro" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="cep" class="mb-1">CEP:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Cep" aria-label="cep" />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label for="complemento" class="mb-1">Complemento:</label>
+                                    <input type="text" class="form-control" placeholder="@cliente.Complemento" aria-label="complemento" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Atualizar <i class="bi bi-arrow-counterclockwise"></i></button>
+                    <button type="button" class="btn btn-danger">Deletar <i class="bi bi-trash3"></i> </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@code {
+    private List<Cliente> listaCliente = new();
+
+
+    protected override void OnInitialized()
+    {
+        CarregarCliente();
+    }
+
+    private void CarregarCliente()
+    {
+        listaCliente = ClienteDAO.ListarCliente();
+    }
+
+}

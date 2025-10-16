@@ -23,10 +23,10 @@ public class ClienteDAO
             comando.Parameters.AddWithValue("@_estado_clie", cliente.Estado);
             comando.Parameters.AddWithValue("@_cpf_clie", cliente.Cpf);
             comando.Parameters.AddWithValue("@_cidade_clie", cliente.Cidade);
-            comando.Parameters.AddWithValue("@_complemento_clie", cliente.Complemento);
+            comando.Parameters.AddWithValue("@_complemento_clie", cliente.Complemento); 
             comando.Parameters.AddWithValue("@_bairro_clie", cliente.Bairro);
             comando.Parameters.AddWithValue("@_rua_clie", cliente.Rua);
-            comando.Parameters.AddWithValue("@_cep_clie", cliente.Cep);
+            comando.Parameters.AddWithValue("@_cep_clie", cliente.Cep); 
        
             comando.ExecuteNonQuery();
         }
