@@ -12,88 +12,55 @@
           <a href="/CadastroProduto" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar novo produto</a>
         </div>
         <table>
+            
             <thead>
                 <tr>
-                    <th> # </th>
                     <th>Nome</th>
                     <th>Código</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
                     <th>Ações</th>
                 </tr>
             </thead>
+                
+            
+               
             <tbody>
                 @{
                     int contador = 1;
-                    @foreach (var produto in listaProdutos)
+                    @foreach (var produto in ListarTodos)
                     {
                         <tr>
-                            <td>@contador</td>
                             <td>@produto.Nome</td>
                             <td>@produto.Codigo</td>
-                            <td>
-                                <button type="button" class="btn-view" data-bs-toggle="modal" data-bs-target="#estoqueModal"><i class="fi fi-rr-eye"></i></button>
-                            </td>
+                            <td>@produto.Quantidade</td>
+                            <td>@produto.Valor</td>
+<td>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+
+</td>
+                           
+
                         </tr>
                         contador++;
                     }
                 }
 
+                @code {
+                    private List<Produto> ListarTodos = new();
+
+
+                    protected override void OnInitialized()
+                    {
+                        CarregarProduto();
+                    }
+
+                    private void CarregarProduto()
+                    {
+                        ListarTodos = ProdutoDAO.ListarTodos();
+                    }
+                }
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="estoqueModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Produto</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @{
-                        foreach (var estoque in listaProdutos)
-                        {
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="produto" class="mb-1">Produto:</label>
-                                    <input type="text" class="form-control" placeholder="@estoque.Nome" aria-label="produto" />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="Codigo" class="mb-1">Código:</label>
-                                    <input type="text" class="form-control" placeholder="@estoque.Codigo" aria-label="Codigo" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="quantidade" class="mb-1">Quantidade:</label>
-                                    <input type="text" class="form-control" placeholder="@estoque.Quantidade" aria-label="quantidade" />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="valor" class="mb-1">Valor:</label>
-                                    <input type="text" class="form-control" placeholder="R$ @estoque.Valor.ToString("C")" aria-label="valor" />
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Atualizar <i class="bi bi-arrow-counterclockwise"></i></button>
-                    <button type="button" class="btn btn-danger">Deletar <i class="bi bi-trash3"></i> </button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-@code {
-    private List<Produto> listaProdutos = new();
-
-
-    protected override void OnInitialized()
-    {
-        CarregarProduto();
-    }
-
-    private void CarregarProduto()
-    {
-        listaProdutos = ProdutoDAO.ListarTodos();
-    }
-}

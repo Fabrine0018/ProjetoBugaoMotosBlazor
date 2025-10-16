@@ -39,7 +39,7 @@
                             <td>@servico.Prestador</td>
                             <td>@servico.Valor.ToString("C")</td>
                             <td>
-                                <button type="button" class="btn-view" data-bs-toggle="modal" data-bs-target="#servicoModal"><i class="fi fi-rr-eye"></i></button>
+                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
                             </td>
                         </tr>
                         contador++;
@@ -47,48 +47,6 @@
                 }
             </tbody>
         </table>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="servicoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Serviço</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                @{
-                    foreach(var servico in listaServico)
-                    {
-                        <div class="row">
-                            <div class="col-6 mb-3 mt-3">
-                                <label for="descrissao" class="mb-1">Serviço Prestado:</label>
-                                <input type="text" class="form-control" placeholder="@servico.Nome" aria-label="nomeServiço" />
-                            </div>
-                            <div class="col-6 mb-3 mt-3">
-                                <label for="descrissao" class="mb-1">Código:</label>
-                                <input type="text" class="form-control" placeholder="@servico.Codigo" aria-label="nomeCodigo" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 mb-3 mt-3">
-                                <label for="descrissao" class="mb-1">Prestador:</label>
-                                <input type="text" class="form-control" placeholder="@servico.Prestador" aria-label="nomePrestador" />
-                            </div>
-                            <div class="col-6 mb-3 mt-3">
-                                <label for="descrissao" class="mb-1">Valor:</label>
-                                <input type="text" class="form-control" placeholder="R$ @servico.Valor.ToString("C")" aria-label="nomeValor" />
-                            </div>
-                        </div>
-                    }
-                }
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Atualizar <i class="bi bi-arrow-counterclockwise"></i></button>
-                    <button type="button" class="btn btn-danger">Deletar <i class="bi bi-trash3"></i> </button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
