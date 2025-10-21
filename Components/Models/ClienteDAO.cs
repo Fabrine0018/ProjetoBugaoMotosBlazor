@@ -61,5 +61,32 @@ public class ClienteDAO
 
         return listaClie;
     }
+
+    public Cliente? BuscarPorId(int id)
+    {
+        var comando = _conexao.CreateCommand("SELECT * FROM cliente WHERE id_cli = @id;");
+        comando.Parameters.AddWithValue("@id", id);
+
+        var leitor = comando.ExecuteReader();
+        if (leitor.Read())
+        {
+            var cliente = new Cliente();
+            cliente.Id = leitor.GetInt32("id_cli");
+            cliente.Nome = DAOHelper.GetString(leitor, "nome_cli");
+            cliente.Telefone = DAOHelper.GetString(leitor, "telefone_cli");
+            cliente.Estado = DAOHelper.GetString(leitor, "estado_cli");
+            cliente.Cpf = DAOHelper.GetString(leitor, "cpf_cli");
+            cliente.Cidade = DAOHelper.GetString(leitor, "cidade_cli");
+            cliente.Complemento = DAOHelper.GetString(leitor, "complemento_cli");
+            cliente.Bairro = DAOHelper.GetString(leitor, "bairro_cli");
+            cliente.Rua = DAOHelper.GetString(leitor, "rua_cli");
+            return cliente;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
 }
 
