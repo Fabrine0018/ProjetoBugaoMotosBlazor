@@ -1,4 +1,5 @@
 ﻿using AppBugaoMotoFVLE.Configs;
+using static Mysqlx.Expect.Open.Types.Condition.Types;
 namespace AppBugaoMotoFVLE.Components.Models
 {
     public class FornecedorDAO
@@ -8,25 +9,20 @@ namespace AppBugaoMotoFVLE.Components.Models
         {
             _conexao = conexao;
         }
-
         public void InserirFornecedor(Fornecedor fornecedor)
         {
             try
             {
-                var comando = _conexao.CreateCommand("INSERT INTO fornecedor VALUES (null, @_nome_forne, @_nome_responsa_forne, @_telefoner_respon_forne, @_telefoner_forne, @_numero_forne, @_complemento_forne, @_cep_forne, @_cnpj_forne, @_rua_forne, @_estado_forne, @_cidade_forne, @_bairro_forne, @_razao_social_forne)");
-                comando.Parameters.AddWithValue("@_nome_forne", fornecedor.Nome);
-                comando.Parameters.AddWithValue("@_nome_responsa_forne", fornecedor.Responsavel);
-                comando.Parameters.AddWithValue("@_telefoner_respon_forne", fornecedor.TelefoneRes);
-                comando.Parameters.AddWithValue("@_telefoner_forne", fornecedor.TelefoneEmp);
-                comando.Parameters.AddWithValue("@_numero_forne", fornecedor.NumeroCasaApt);
-                comando.Parameters.AddWithValue("@_complemento_forne", fornecedor.Complemento);
-                comando.Parameters.AddWithValue("@_cep_forne", fornecedor.CEP);
-                comando.Parameters.AddWithValue("@_cnpj_forne", fornecedor.CNPJ);
-                comando.Parameters.AddWithValue("@_rua_forne", fornecedor.Rua);
-                comando.Parameters.AddWithValue("@_estado_forne", fornecedor.Estado);
-                comando.Parameters.AddWithValue("@_cidade_forne", fornecedor.Cidade);
-                comando.Parameters.AddWithValue("@_bairro_forne", fornecedor.Bairro);
-                comando.Parameters.AddWithValue("@_razao_social_forne", fornecedor.RazaoSocial);
+                var comando = _conexao.CreateCommand("INSERT INTO fornecedor VALUES (null, @_nome_empre_for, @_nome_funcio_for, @_telefone_for, @_complemento_for, @_cnpj_for, @_rua_for, @_estado_for, @_cidade_for, @_bairro_for)");
+                comando.Parameters.AddWithValue("@_nome_empre_for", fornecedor.Nome);
+                comando.Parameters.AddWithValue("@_nome_funcio_for", fornecedor.Responsavel);
+                comando.Parameters.AddWithValue("@_telefone_for", fornecedor.Telefone);
+                comando.Parameters.AddWithValue("@_complemento_for", fornecedor.Complemento);
+                comando.Parameters.AddWithValue("@_cnpj_for", fornecedor.CNPJ);
+                comando.Parameters.AddWithValue("@_rua_for", fornecedor.Rua);
+                comando.Parameters.AddWithValue("@_estado_for", fornecedor.Estado);
+                comando.Parameters.AddWithValue("@_cidade_for", fornecedor.Cidade);
+                comando.Parameters.AddWithValue("@_bairro_for", fornecedor.Bairro);
                 comando.ExecuteNonQuery();
             }
             catch (Exception)
@@ -38,27 +34,23 @@ namespace AppBugaoMotoFVLE.Components.Models
         public List<Fornecedor> ListarFornecedores()
         {
             var lista = new List<Fornecedor>();
-            var comando = _conexao.CreateCommand("SELECT *FROM fornecedor");
+            var comando = _conexao.CreateCommand("SELECT * FROM fornecedor");
             var leitor = comando.ExecuteReader();
 
             while (leitor.Read())
             {
                 var fornecedor = new Fornecedor
                 {
-                    Id = leitor.GetInt32("id_forne"),
-                    Nome = DAOHelper.GetString(leitor, "nome_forne"),
-                    Responsavel = DAOHelper.GetString(leitor, "nome_responsa_forne"),
-                    CEP = DAOHelper.GetString(leitor, "cep_forne"),
-                    CNPJ = DAOHelper.GetString(leitor, "cnpj_forne"),
-                    TelefoneRes = DAOHelper.GetString(leitor, "telefoner_respon_forne"),
-                    Rua = DAOHelper.GetString(leitor, "rua_forne"),
-                    Bairro = DAOHelper.GetString(leitor, "bairro_forne"),
-                    Cidade = DAOHelper.GetString(leitor, "cidade_forne"),
-                    Estado = DAOHelper.GetString(leitor, "estado_forne"),
-                    NumeroCasaApt = DAOHelper.GetString(leitor, "numero_forne"),
-                    Complemento = DAOHelper.GetString(leitor, "complemento_forne"),
-                    RazaoSocial = DAOHelper.GetString(leitor, "razao_social_forne"),
-                    TelefoneEmp = DAOHelper.GetString(leitor, "telefoner_forne")
+                    Id = leitor.GetInt32("id_for"),
+                    Nome = DAOHelper.GetString(leitor, "nome_empre_for"),
+                    Responsavel = DAOHelper.GetString(leitor, "nome_funcio_for"),
+                    CNPJ = DAOHelper.GetString(leitor, "cnpj_for"),
+                    Rua = DAOHelper.GetString(leitor, "rua_for"),
+                    Bairro = DAOHelper.GetString(leitor, "bairro_for"),
+                    Cidade = DAOHelper.GetString(leitor, "cidade_for"),
+                    Estado = DAOHelper.GetString(leitor, "estado_for"),
+                    Complemento = DAOHelper.GetString(leitor, "complemento_for"),
+                    Telefone = DAOHelper.GetString(leitor, "telefone_for")
                 };
                 lista.Add(fornecedor);
             }

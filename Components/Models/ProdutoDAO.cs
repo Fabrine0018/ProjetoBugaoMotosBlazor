@@ -1,5 +1,6 @@
 ﻿namespace AppBugaoMotoFVLE.Components.Models;
 using AppBugaoMotoFVLE.Configs;
+using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 public class ProdutoDAO
 {
@@ -14,11 +15,11 @@ public class ProdutoDAO
     {
         try
         {
-            var comando = _conexao.CreateCommand("INSERT INTO Produto VALUES (null, @_nome_prod, @_codigo_prod, @_quantidade_prod, @_valor_prod,null)");
-            comando.Parameters.AddWithValue("@_nome_prod", produto.Nome);
-            comando.Parameters.AddWithValue("@_codigo_prod", produto.Codigo);
-            comando.Parameters.AddWithValue("@_quantidade_prod", produto.Quantidade);
-            comando.Parameters.AddWithValue("@_valor_prod", produto.Valor);
+            var comando = _conexao.CreateCommand("INSERT INTO Produto VALUES (null, @_nome_pro, @_codigo_pro, @_quantidade_pro, @_valor_pro )");
+            comando.Parameters.AddWithValue("@_nome_pro", produto.Nome);
+            comando.Parameters.AddWithValue("@_codigo_pro", produto.Codigo);
+            comando.Parameters.AddWithValue("@_quantidade_pro", produto.Quantidade);
+            comando.Parameters.AddWithValue("@_valor_pro", produto.Valor);
 
 
             comando.ExecuteNonQuery();
@@ -38,11 +39,11 @@ public class ProdutoDAO
         while (leitor.Read())
         {
             var produto = new Produto();
-            produto.IdProduto = leitor.GetInt32("id_prod");
-            produto.Nome = DAOHelper.GetString(leitor, "nome_prod");
-            produto.Codigo = DAOHelper.GetString(leitor, "codigo_prod");
-            produto.Quantidade = leitor.GetInt32("quantidade_prod");
-            produto.Valor = leitor.GetDouble("valor_prod");
+            produto.Id = leitor.GetInt32("id_pro");
+            produto.Nome = DAOHelper.GetString(leitor, "nome_pro");
+            produto.Codigo = DAOHelper.GetString(leitor, "codigo_pro");
+            produto.Quantidade = leitor.GetInt32("quantidade_pro");
+            produto.Valor = leitor.GetDouble("valor_pro");
 
             lista.Add(produto);
         }

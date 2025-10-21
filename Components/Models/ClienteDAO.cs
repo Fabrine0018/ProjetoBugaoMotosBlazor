@@ -2,6 +2,7 @@
 using AppBugaoMotoFVLE.Configs;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing;
+using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 
 public class ClienteDAO
@@ -17,16 +18,16 @@ public class ClienteDAO
     {
         try
         {
-            var comando = _conexao.CreateCommand("INSERT INTO Cliente VALUES (null, @_nome_clie, @_telefone_clie, @_estado_clie, @_cpf_clie, @_cidade_clie, @_complemento_clie, @_bairro_clie, @_rua_clie, @_cep_clie)");
-            comando.Parameters.AddWithValue("@_nome_clie", cliente.Nome);
-            comando.Parameters.AddWithValue("@_telefone_clie",cliente.Telefone);
-            comando.Parameters.AddWithValue("@_estado_clie", cliente.Estado);
-            comando.Parameters.AddWithValue("@_cpf_clie", cliente.Cpf);
-            comando.Parameters.AddWithValue("@_cidade_clie", cliente.Cidade);
-            comando.Parameters.AddWithValue("@_complemento_clie", cliente.Complemento);
-            comando.Parameters.AddWithValue("@_bairro_clie", cliente.Bairro);
-            comando.Parameters.AddWithValue("@_rua_clie", cliente.Rua);
-            comando.Parameters.AddWithValue("@_cep_clie", cliente.Cep);
+            var comando = _conexao.CreateCommand("INSERT INTO Cliente VALUES (null, @_nome_cli, @_telefone_cli, @_estado_cli, @_cpf_cli, @_cidade_cli, @_complemento_cli, @_bairro_cli, @_rua_cli)");
+            comando.Parameters.AddWithValue("@_nome_cli", cliente.Nome);
+            comando.Parameters.AddWithValue("@_telefone_cli",cliente.Telefone);
+            comando.Parameters.AddWithValue("@_estado_cli", cliente.Estado);
+            comando.Parameters.AddWithValue("@_cpf_cli", cliente.Cpf);
+            comando.Parameters.AddWithValue("@_cidade_cli", cliente.Cidade);
+            comando.Parameters.AddWithValue("@_complemento_cli", cliente.Complemento);
+            comando.Parameters.AddWithValue("@_bairro_cli", cliente.Bairro);
+            comando.Parameters.AddWithValue("@_rua_cli", cliente.Rua);
+
        
             comando.ExecuteNonQuery();
         }
@@ -35,7 +36,7 @@ public class ClienteDAO
             throw;
         }
     }
-    //Eduardo arrumou
+  
     public List<Cliente> ListarCliente()
     {
         var listaClie = new List<Cliente>();
@@ -44,18 +45,16 @@ public class ClienteDAO
 
         while (leitor.Read())
         {
-            //ERRO AQUI
             var cliente = new Cliente();
-            cliente.IdCli = leitor.GetInt32("id_clie");
-            cliente.Nome = DAOHelper.GetString(leitor, "nome_clie");
-            cliente.Telefone = DAOHelper.GetString(leitor, "telefone_clie");
-            cliente.Estado = DAOHelper.GetString(leitor, "estado_clie");
-            cliente.Cpf = DAOHelper.GetString(leitor, "cpf_clie");
-            cliente.Cidade = DAOHelper.GetString(leitor, "cidade_clie");
-            cliente.Complemento = DAOHelper.GetString(leitor, "complemento_clie");
-            cliente.Bairro = DAOHelper.GetString(leitor, "bairro_clie");
-            cliente.Rua = DAOHelper.GetString(leitor, "rua_clie");
-            cliente.Cep = DAOHelper.GetString(leitor, "cep_clie");
+            cliente.Id = leitor.GetInt32("id_cli");
+            cliente.Nome = DAOHelper.GetString(leitor, "nome_cli");
+            cliente.Telefone = DAOHelper.GetString(leitor, "telefone_cli");
+            cliente.Estado = DAOHelper.GetString(leitor, "estado_cli");
+            cliente.Cpf = DAOHelper.GetString(leitor, "cpf_cli");
+            cliente.Cidade = DAOHelper.GetString(leitor, "cidade_cli");
+            cliente.Complemento = DAOHelper.GetString(leitor, "complemento_cli");
+            cliente.Bairro = DAOHelper.GetString(leitor, "bairro_cli");
+            cliente.Rua = DAOHelper.GetString(leitor, "rua_cli");
 
             listaClie.Add(cliente);
         }

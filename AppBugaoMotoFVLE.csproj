@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\Pages\Cliente\" />
     <Folder Include="Configs_BD\" />
     <Folder Include="wwwroot\SCRIPT\" />
   </ItemGroup>
