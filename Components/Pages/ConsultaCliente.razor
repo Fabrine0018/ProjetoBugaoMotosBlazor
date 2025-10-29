@@ -2,13 +2,13 @@
 
 @using AppBugaoMotoFVLE.Components.Models;
 @inject ClienteDAO ClienteDAO
+@inject NavigationManager Navigation;
 
 <div class="container-md pt-3">
     <div class="breadcrumb">
         <a href="/"> Home </a> • <a> Consultar Cliente </a>
     </div>
 
-    ```
     <div class="border p-4 rounded">
         <h2>Consultar Cliente 🔍</h2>
 
@@ -24,7 +24,6 @@
                     <th># </th>
                     <th>Nome</th>
                     <th>Telefone</th>
-                    <th>Cpf</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -37,10 +36,10 @@
                             <td> @contador </td>
                             <td>@cliente.Nome</td>
                             <td>@cliente.Telefone</td>
-                            <td> @cliente.Cpf </td>
                             <td>
-                                <a type="button" class="btn-view" data-bs-toggle="modal" data-bs-target="#cliente-@cliente.Id"><i class="fi fi-rr-eye"></i></a>
-
+                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@cliente.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
+                                <a href="/Atualizar-Cliente-@cliente.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
+                                <a data-bs-toggle="modal" data-bs-target="#excluir-@cliente.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
                             </td>
                         </tr>
                         contador++;
@@ -50,74 +49,88 @@
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
-    @{
-        foreach (var cliente in listaCliente)
-        {
-            <div class="modal fade" id="cliente-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cliente</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="row">
-                                <div class="col-12 mb-3 mt-3">
-                                    <label for="nome" class="mb-1">Nome do Cliente:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Nome" aria-label="nome" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="telefone" class="mb-1">Telefone:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Telefone" aria-label="telefone" />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="CPF" class="mb-1">CPF:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Cpf" aria-label="CPF" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="cidade" class="mb-1">Cidade:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Cidade" aria-label="cidade" />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="estado" class="mb-1">Estado:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Estado" aria-label="estado" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="rua" class="mb-1">Rua:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Rua" aria-label="rua" />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="bairro" class="mb-1">Bairro:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Bairro" aria-label="bairro" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label for="complemento" class="mb-1">Complemento:</label>
-                                    <input type="text" class="form-control" placeholder="@cliente.Complemento" aria-label="complemento" />
-                                </div>
+@{
+    foreach (var cliente in listaCliente)
+    {
+        <!-- Modal Visualizar -->
+        <div class="modal fade" id="visualizar-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Visualizar Cliente </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3 mt-3">
+                                <label for="nome" class="mb-1">Nome do Cliente:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Nome" aria-label="nome" readonly />
                             </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Atualizar <i class="bi bi-arrow-counterclockwise"></i></button>
-                            <button type="button" class="btn btn-danger">Deletar <i class="bi bi-trash3"></i> </button>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="telefone" class="mb-1">Telefone:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Telefone" aria-label="telefone" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="CPF" class="mb-1">CPF:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Cpf" aria-label="CPF" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="cidade" class="mb-1">Cidade:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Cidade" aria-label="cidade" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="estado" class="mb-1">Estado:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Estado" aria-label="estado" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="rua" class="mb-1">Rua:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Rua" aria-label="rua" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="bairro" class="mb-1">Bairro:</label>
+                                <input type="text" class="form-control" @bind-value="@cliente.Bairro" aria-label="bairro" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mb-3 mt-3">
+                                <label for="complemento" class="mb-1">Complemento:</label>
+                                <textarea class="w-auto" readonly> @cliente.Complemento </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-        }
-
+        <!-- Modal Excluir -->
+        <div class="modal fade" id="excluir-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <EditForm Model="cliente" OnValidSubmit="@(() => Excluir(cliente.Id))" FormName=@($"ClienteExcluir{cliente.Id}")>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Excluir cliente </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-center">Você tem certeza que deseja excluir o(a) cliente <strong>@cliente.Nome</strong>? Após a exclusão não será possível recuperar esse registro.  </h5>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <a href="/ConsultaCliente" class="btn btn-info btn-lg" data-bs-dismiss="modal"> Cancelar</a>
+                            <button type="submit" class="btn btn-danger  btn-lg"> Deletar </button>
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
     }
-
+}
+  
 </div>
 
 @code {
@@ -128,17 +141,18 @@
     public int Id { get; set; }
 
     [SupplyParameterFromForm]
-    private Cliente cliente1 { get; set; } = new();
+    private Cliente cliente { get; set; } = new();
 
     protected override void OnInitialized()
     {
         // listar os clientes
         CarregarCliente();
-        // buscar o cliente
+
+        // buscar o cliente por id
         var _cliente = ClienteDAO.BuscarPorId(Id);
         if (_cliente != null)
         {
-            cliente1 = _cliente;
+            cliente = _cliente;
         }
         else
         {
@@ -153,5 +167,18 @@
         listaCliente = ClienteDAO.ListarCliente();
     }
 
+    private void Excluir(int id)
+    {
+        try
+        {
+            ClienteDAO.Deletar(id);
+            Navigation.NavigateTo("/ConsultaCliente");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao excluir o produto: {ex.Message}";
+        }
+        CarregarCliente();
+    }
 
 }

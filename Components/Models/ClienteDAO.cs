@@ -88,5 +88,42 @@ public class ClienteDAO
         }
 
     }
+
+    public void Atualizar (Cliente cliente)
+    {
+        try
+        {
+            var comando = _conexao.CreateCommand("UPDATE cliente SET nome_cli = @_nome, telefone_cli = @_telefone, estado_cli = @_estado, cpf_cli = @_cpf, cidade_cli = @_cidade, complemento_cli = @_complemento, bairro_cli = @_bairro, rua_cli = @_rua WHERE id_cli = @_id");
+            comando.Parameters.AddWithValue("@_nome", cliente.Nome);
+            comando.Parameters.AddWithValue("@_telefone", cliente.Telefone);
+            comando.Parameters.AddWithValue("@_estado", cliente.Estado);
+            comando.Parameters.AddWithValue("@_cpf", cliente.Cpf);
+            comando.Parameters.AddWithValue("@_cidade", cliente.Cidade);
+            comando.Parameters.AddWithValue("@_complemento", cliente.Complemento);
+            comando.Parameters.AddWithValue("@_bairro", cliente.Bairro);
+            comando.Parameters.AddWithValue("@_rua", cliente.Rua);
+            comando.Parameters.AddWithValue("@_id", cliente.Id);
+            comando.ExecuteNonQuery();
+        }
+        catch
+        {
+            throw;
+        }
+    }
+
+    public void Deletar (int id)
+    {
+        try
+        {
+            var comando = _conexao.CreateCommand("DELETE FROM cliente WHERE id_cli = @id");
+            comando.Parameters.AddWithValue("@id", id);
+            comando.ExecuteNonQuery();
+
+        }
+        catch
+        {
+            throw;
+        }
+    }
 }
 

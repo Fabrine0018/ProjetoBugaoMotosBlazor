@@ -27,7 +27,7 @@
     </div>
 
 
-    <EditForm Model="_novoCliente" OnSubmit="Salvar">
+    <EditForm Model="_novoCliente" OnSubmit="Salvar" FormName="CadastrarCliente">
     <input @bind-value="_novoCliente!.Nome"  type="text" placeholder="Nome">
     <div class="row">
         <div><input @bind-value="_novoCliente!.Telefone" type="text" placeholder="Telefone"></div>

@@ -1,0 +1,117 @@
+﻿@page "/Atualizar-Cliente-{Id:int}"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ClienteDAO clienteDao;
+@inject NavigationManager Navigation;
+
+@if (erro == null)
+{
+    
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline">@erro</span>
+    </div>
+}
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a href="/ConsultaCliente"> Consultar: Clientes </a> • <a> Editar: Cliente </a>
+    </div>
+  
+    <div class="border p-4 rounded">
+
+        <div class="border-left">
+            <h3>Editar Cliente</h3>
+            <p>Preencha as informações que deseja editar </p>
+        </div>
+
+        <EditForm Model="cliente" OnSubmit="Salvar" FormName="ClienteAtualizar">
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <label for="nome" class="mb-1">Nome do Cliente:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Nome" aria-label="nome" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="telefone" class="mb-1">Telefone:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Telefone" aria-label="telefone" />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="CPF" class="mb-1">CPF:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Cpf" aria-label="CPF" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="cidade" class="mb-1">Cidade:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Cidade" aria-label="cidade" />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="estado" class="mb-1">Estado:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Estado" aria-label="estado" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-3 ">
+                    <label for="rua" class="mb-1">Rua:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Rua" aria-label="rua" />
+                </div>
+                <div class="col-6 mb-3 ">
+                    <label for="bairro" class="mb-1">Bairro:</label>
+                    <input type="text" class="form-control" @bind-value="@cliente.Bairro" aria-label="bairro" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-3 ">
+                    <label for="complemento" class="mb-1">Complemento:</label>
+                    <textarea class="w-auto"> @cliente.Complemento </textarea>
+                </div>
+            </div>
+            <div class=" d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Salvar Edição </button>
+                <button class="btn btn-danger">Cancelar</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+
+    private Cliente cliente { get; set; } = new Cliente();
+
+    protected override void OnInitialized()
+    {
+        var _cliente = clienteDao.BuscarPorId(Id);
+        if(_cliente != null)
+        {
+            cliente = _cliente;
+        }
+        else
+        {
+            erro = "Cliente não encontrado";
+        }
+    }
+
+
+    private void Salvar()
+    {
+        try
+        {
+            clienteDao.Atualizar(cliente);
+            Navigation.NavigateTo("/ConsultaCliente");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Error ao salvar o cliente: {ex.Message}";
+        }
+
+    }
+}
+
