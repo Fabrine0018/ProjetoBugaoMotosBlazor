@@ -111,7 +111,7 @@ public class ClienteDAO
         }
     }
 
-    public void Deletar (int id)
+    public void Deletar(int id)
     {
         try
         {

@@ -1,0 +1,95 @@
+﻿@page "/Atualizar-servico-{Id:int}"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ServicoDAO servicoDAO;
+@inject NavigationManager Navigation;
+
+@if (erro == null)
+{
+    
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline">@erro</span>
+    </div>
+}
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a href="/ConsultaServico"> Consultar: Serviço </a> • <a> Editar: Serviço </a>
+    </div>
+  
+    <div class="border p-4 rounded">
+
+        <div class="border-left">
+            <h3>Editar Serviço</h3>
+            <p>Preencha as informações que deseja editar </p>
+        </div>
+
+        <EditForm Model="servico" OnSubmit="Salvar" FormName="ServicoAtualizar">
+            <div class="row">
+                <div class="col-6 mb-3 mt-3">
+                    <label for="nome" class="mb-1">Nome do Serviço:</label>
+                    <input type="text" class="form-control" @bind-value="@servico.Nome" placeholder="Nome do serviço"/>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="codigo" class="mb-1">Código:</label>
+                    <input type="text" class="form-control" @bind-value="@servico.Codigo" aria-label="Código" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="Prestador" class="mb-1">Prestador:</label>
+                    <input type="text" class="form-control" @bind-value="@servico.Prestador" aria-label="Prestador" />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="valor" class="mb-1">Valor:</label>
+                    <input type="text" class="form-control" @bind-value="@servico.Valor" aria-label="Valor" />
+                </div>
+            </div>
+            <div class=" d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Salvar Edição </button>
+                <button class="btn btn-danger">Cancelar</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+
+    private Servico servico { get; set; } = new Servico();
+
+    protected override void OnInitialized()
+    {
+        var _servico = servicoDAO.BuscarPorId(Id);
+        if(_servico != null)
+        {
+            servico = _servico;
+        }
+        else
+        {
+            erro = "Serviço não encontrado";
+        }
+    }
+
+
+    private void Salvar()
+    {
+        try
+        {
+            servicoDAO.Atualizar(servico);
+            Navigation.NavigateTo("/ConsultaServico");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Error ao salvar o serviço: {ex.Message}";
+        }
+
+    }
+}
+

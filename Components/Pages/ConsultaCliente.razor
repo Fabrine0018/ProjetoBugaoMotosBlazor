@@ -1,7 +1,7 @@
 ﻿@page "/ConsultaCliente"
 
 @using AppBugaoMotoFVLE.Components.Models;
-@inject ClienteDAO ClienteDAO
+@inject ClienteDAO clienteDAO
 @inject NavigationManager Navigation;
 
 <div class="container-md pt-3">
@@ -149,7 +149,7 @@
         CarregarCliente();
 
         // buscar o cliente por id
-        var _cliente = ClienteDAO.BuscarPorId(Id);
+        var _cliente = clienteDAO.BuscarPorId(Id);
         if (_cliente != null)
         {
             cliente = _cliente;
@@ -164,19 +164,19 @@
 
     private void CarregarCliente()
     {
-        listaCliente = ClienteDAO.ListarCliente();
+        listaCliente = clienteDAO.ListarCliente();
     }
 
     private void Excluir(int id)
     {
         try
         {
-            ClienteDAO.Deletar(id);
+            clienteDAO.Deletar(id);
             Navigation.NavigateTo("/ConsultaCliente");
         }
         catch (Exception ex)
         {
-            erro = $"Erro ao excluir o produto: {ex.Message}";
+            erro = $"Erro ao excluir o(a) cliente: {ex.Message}";
         }
         CarregarCliente();
     }

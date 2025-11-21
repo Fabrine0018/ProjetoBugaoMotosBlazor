@@ -39,7 +39,7 @@ id_ser int primary key auto_increment,
 nome_ser varchar (300),
 codigo_ser varchar (300),
 prestador_ser varchar (300),
-valor_ser int
+valor_ser double
 );
 
 

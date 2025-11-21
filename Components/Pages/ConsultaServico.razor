@@ -2,6 +2,7 @@
 
 @using AppBugaoMotoFVLE.Components.Models
 @inject ServicoDAO servicoDAO
+@inject NavigationManager navigation
 
 <div class="container-md pt-3">
     <div class="breadcrumb">
@@ -39,7 +40,9 @@
                             <td>@servico.Prestador</td>
                             <td>@servico.Valor.ToString("C")</td>
                             <td>
-                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
+                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@servico.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
+                                <a href="/Atualizar-servico-@servico.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
+                                <a data-bs-toggle="modal" data-bs-target="#excluir-@servico.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
                             </td>
                         </tr>
                         contador++;
@@ -49,12 +52,105 @@
         </table>
     </div>
 </div>
+@{
+    foreach (var servico in listaServico)
+    {
+        <!-- Modal Visualizar -->
+        <div class="modal fade" id="visualizar-@servico.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Visualizar Serviço </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="nome" class="mb-1">Nome do Cliente:</label>
+                                <input type="text" class="form-control" @bind-value="@servico.Nome" aria-label="nome" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="codigo" class="mb-1">Código:</label>
+                                <input type="text" class="form-control" @bind-value="@servico.Codigo" aria-label="código" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="prestador" class="mb-1">Prestador:</label>
+                                <input type="text" class="form-control" @bind-value="@servico.Prestador" aria-label="prestador" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="valor" class="mb-1">Valor:</label>
+                                <input type="text" class="form-control" @bind-value="@servico.Valor" aria-label="valor" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Modal Excluir -->
+        <div class="modal fade" id="excluir-@servico.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <EditForm Model="servico" OnValidSubmit="@(() => Excluir(servico.Id))" FormName=@($"ClienteExcluir{servico.Id}")>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Excluir cliente </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-center">Você tem certeza que deseja excluir o serviço <strong>@servico.Nome</strong>?<br> Após a exclusão não será possível recuperar esse registro.  </h5>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <a href="/ConsultaCliente" class="btn btn-info btn-lg" data-bs-dismiss="modal"> Cancelar</a>
+                            <button type="submit" class="btn btn-danger  btn-lg"> Deletar </button>
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    }
+}
 @code {
+
+    /* buscar id do cliente */
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Servico servico1 { get; set; } = new();
+
     private List<Servico> listaServico = new();
 
     protected override void OnInitialized()
     {
+        CarregarServico();
+        // buscar o cliente por id
+        var _servico = servicoDAO.BuscarPorId(Id);
+        if (_servico != null)
+        {
+            servico1 = _servico;
+        }
+        else
+        {
+            erro = "Serviço não encontrado!";
+        }
+    }
+
+    private void Excluir(int id)
+    {
+        try
+        {
+            servicoDAO.Deletar(id);
+            navigation.NavigateTo("/ConsultaServico");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao excluir o serviço: {ex.Message}";
+        }
+
         CarregarServico();
     }
 
@@ -62,4 +158,5 @@
     {
         listaServico = servicoDAO.ListarServico();
     }
+
 }
