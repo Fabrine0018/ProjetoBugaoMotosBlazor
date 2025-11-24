@@ -1,0 +1,205 @@
+﻿@page "/ConsultaFornecedor"
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject FornecedorDAO fornecedorDAO
+@inject NavigationManager Navigation;
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a> Consultar Fornecedor </a>
+    </div>
+
+    <div class="border p-4 rounded">
+        <h2>Consultar Fornecedor 🔍</h2>
+
+        <div class="search-bar mb-3 d-flex gap-2">
+            <input type="text" placeholder="Buscar" class="form-control" />
+            <button class="btn btn-filter"> <i class="fa-solid fa-filter"></i> Filtrar</button>
+            <a href="/CadastroFornecedor" class="btn btn-add"> <i class="fi fi-sr-user-add"></i> Adicionar novo fornecedor</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th># </th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int contador = 1;
+                    foreach (var fornecedor in listaFornecedor)
+                    {
+                        <tr>
+                            <td>@contador</td>
+                            <td>@fornecedor.Nome</td>
+                            <td>@fornecedor.Telefone</td>
+                            <td>
+                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@fornecedor.Id"
+                                   class="btn btn-dark">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+
+                                <a href="/Atualizar-Fornecedor-@fornecedor.Id" class="btn btn-info">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <a data-bs-toggle="modal" data-bs-target="#excluir-@fornecedor.Id"
+                                   class="btn btn-danger">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        contador++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @{
+        foreach (var fornecedor in listaFornecedor)
+        {
+            var fornecedorLocal = fornecedor;
+        }
+    }
+
+
+    @{
+        foreach (var fornecedor in listaFornecedor)
+        {
+            var fornecedorLocal = fornecedor;
+
+            <!-- Modal Visualizar -->
+            <div class="modal fade" id="visualizar-@fornecedorLocal.Id" tabindex="-1"
+                 aria-labelledby="visualizarLabel-@fornecedorLocal.Id" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5"> Visualizar Fornecedor </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 mb-3 mt-3">
+                                    <label class="mb-1">Nome:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Nome" readonly />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">Telefone:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Telefone" readonly />
+                                </div>
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">CNPJ:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.CNPJ'" readonly />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">Cidade:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Cidade" readonly />
+                                </div>
+
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">Estado:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Estado" readonly />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">Rua:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Rua" readonly />
+                                </div>
+
+                                <div class="col-6 mb-3 mt-3">
+                                    <label class="mb-1">Bairro:</label>
+                                    <input type="text" class="form-control" value="@fornecedorLocal.Bairro" readonly />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 mb-3 mt-3">
+                                    <label class="mb-1">Complemento:</label>
+                                    <textarea class="form-control" readonly>@fornecedorLocal.Complemento</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="excluir-@fornecedorLocal.Id" tabindex="-1"
+                 aria-labelledby="excluirLabel-@fornecedorLocal.Id" aria-hidden="true">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5">Excluir Fornecedor</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <h5 class="text-center">
+                                Tem certeza que deseja excluir o(a) fornecedor
+                                <strong>@fornecedorLocal.Nome</strong>?<br />
+                                Após excluir, não será possível recuperar.
+                            </h5>
+                        </div>
+
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
+
+                            <button class="btn btn-danger" @onclick="() => Excluir(fornecedorLocal.Id)">
+                                Deletar
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+</div>
+
+@code {
+
+    private List<Fornecedor> listaFornecedor = new();
+    private string erro = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        CarregarFornecedor();
+    }
+
+    private void CarregarFornecedor()
+    {
+        listaFornecedor = fornecedorDAO.ListarFornecedores() ?? new List<Fornecedor>();
+    }
+
+    private void Excluir(int id)
+    {
+        try
+        {
+            fornecedorDAO.DeletarFor(id);
+            CarregarFornecedor();
+
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao excluir fornecedor: {ex.Message}";
+        }
+    }
+}

@@ -1,0 +1,133 @@
+﻿@page "/Atualizar-Fornecedor-{Id:int}"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject FornecedorDAO fornecedorDao;
+@inject NavigationManager Navigation;
+
+@if (!string.IsNullOrEmpty(erro))
+{
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline">@erro</span>
+    </div>
+}
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a href="/ConsultaFornecedor"> Consultar: Fornecedores </a> • <a> Editar: Fornecedor </a>
+    </div>
+
+    <div class="border p-4 rounded">
+
+        <div class="border-left">
+            <h3>Editar Fornecedor</h3>
+            <p>Preencha as informações que deseja editar</p>
+        </div>
+
+        <EditForm Model="fornecedor" OnValidSubmit="Salvar" FormName="AtualizarFornecedor">
+             
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <label class="mb-1">Nome do Fornecedor:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Nome" />
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12 mb-3 mt-3">
+                    <label class="mb-1">Nome do Responsavel:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Responsavel" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label class="mb-1">Telefone:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Telefone" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label class="mb-1">CNPJ:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.CNPJ" />
+                </div>
+            </div>
+
+         
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label class="mb-1">Cidade:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Cidade" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label class="mb-1">Estado:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Estado" />
+                </div>
+            </div>
+
+   
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label class="mb-1">Rua:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Rua" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label class="mb-1">Bairro:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Bairro" />
+                </div>
+            </div>
+
+            <div class="row">
+            <div class="col-6 mb-3">
+                <label class="mb-1">Complemento:</label>
+                    <input type="text" class="form-control" @bind-value="@fornecedor.Complemento" />
+            </div>
+          </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Salvar Edição</button>
+                <button type="button" class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+            </div>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    private string erro = string.Empty;
+
+    [Parameter] public int Id { get; set; }
+
+    private Fornecedor fornecedor { get; set; } = new Fornecedor();
+
+    protected override void OnInitialized()
+    {
+        var _fornecedor = fornecedorDao.BuacarIdFone(Id);
+
+        if (_fornecedor != null)
+            fornecedor = _fornecedor;
+        else
+            erro = "Fornecedor não encontrado";
+    }
+
+    private void Salvar()
+    {
+        try
+        {
+            fornecedorDao.AtualizarForne(fornecedor);
+            Navigation.NavigateTo("/ConsultaFornecedor");
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao salvar o fornecedor: {ex.Message}";
+        }
+    }
+
+    private void Cancelar()
+    {
+        Navigation.NavigateTo("/ConsultaFornecedor");
+    }
+}
