@@ -48,3 +48,4 @@ id_ven int primary key auto_increment,
 data_ven varchar (300),
 valor_total_ven varchar (300)
 );
+bd_bugaomotos_ofici

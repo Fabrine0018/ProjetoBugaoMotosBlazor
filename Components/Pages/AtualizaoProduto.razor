@@ -1,0 +1,82 @@
+﻿@page "/Atualizar-Produto-{Id:int}"
+@rendermode InteractiveServer
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ProdutoDAO produtoDAO
+@inject NavigationManager Navigation;
+
+@if (!string.IsNullOrEmpty(erro))
+{
+    <div class="alert alert-danger">@erro</div>
+}
+
+<div class="container-md pt-3">
+    <div class="breadcrumb">
+        <a href="/"> Home </a> • <a href="/ConsultarProduto"> Consultar Produto </a> • Editar Produto
+    </div>
+
+    <div class="border p-4 rounded">
+        <h3>Editar Produto</h3>
+        <p>Atualize as informações abaixo:</p>
+
+        <EditForm Model="produto" OnValidSubmit="Salvar">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <label>Nome:</label>
+                    <input class="form-control" @bind-value="produto.Nome" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label>Código:</label>
+                    <input class="form-control" @bind-value="produto.Codigo" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label>Quantidade:</label>
+                    <input class="form-control" @bind-value="produto.Quantidade" />
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label>Valor:</label>
+                    <input class="form-control" @bind-value="produto.Valor" />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="/ConsultarProduto" class="btn btn-danger">Cancelar</a>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    private Produto produto = new();
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var p = produtoDAO.BuscarProd(Id);
+        if (p != null)
+            produto = p;
+        else
+            erro = "Produto não encontrado!";
+    }
+
+    private void Salvar()
+    {
+        try
+        {
+            produtoDAO.AtualizarProd(produto);
+            Navigation.NavigateTo("/ConsultarProduto", true);
+        }
+        catch (Exception ex)
+        {
+            erro = $"Erro ao salvar: {ex.Message}";
+        }
+    }
+}
