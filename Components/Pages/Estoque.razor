@@ -1,66 +1,159 @@
 ﻿@page "/estoque"
-@inject ProdutoDAO ProdutoDAO
+
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ProdutoDAO produtoDAO
+@inject NavigationManager Navigation;
+
+<div class="breadcrumb">
+    <a href="/"> Home </a> • <a> Consultar Produto </a>
+</div>
+
 <div class="container-md pt-3">
-    <div class="breadcrumb">
-        <a href="/"> Home </a> • <a href="#"> Estoque </a>
-    </div>
-    <div class="border p-4 rounded bg-white">
-        <h2>Consultar Produto 🔍</h2>
-        <div class="search-bar">
-          <input type="text" placeholder="Buscar">
-          <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
-          <a href="/CadastroProduto" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar novo produto</a>
+    <div class="border p-4 rounded">
+        <h2>Consultar Produto 📦</h2>
+
+        <div class="search-bar mb-3 d-flex gap-2">
+            <input type="text" placeholder="Buscar" class="form-control" />
+            <button class="btn btn-filter"> <i class="fa-solid fa-filter"></i> Filtrar</button>
+            <a href="/CadastroProduto" class="btn btn-add"> <i class="bi bi-plus"></i> Adicionar novo produto</a>
         </div>
-        <table>
-            
+
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Código</th>
+                    <th>#</th>
+                    <th>Produto</th>
                     <th>Quantidade</th>
-                    <th>Valor</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-                
-            
-               
             <tbody>
                 @{
                     int contador = 1;
-                    @foreach (var produto in ListarTodos)
+                    foreach (var prod in listaProduto)
                     {
                         <tr>
-                            <td>@produto.Nome</td>
-                            <td>@produto.Codigo</td>
-                            <td>@produto.Quantidade</td>
-                            <td>@produto.Valor</td>
-<td>
-                                <button class="btn-view"><i class="fi fi-rr-eye"></i></button>
-
-</td>
-                           
-
+                            <td>@contador</td>
+                            <td>@prod.Nome</td>
+                            <td>@prod.Quantidade</td>
+                            <td>
+                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@prod.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
+                                <a href="/Atualizar-Produto-@prod.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
+                                <a data-bs-toggle="modal" data-bs-target="#excluir-@prod.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
+                            </td>
                         </tr>
                         contador++;
-                    }
-                }
-
-                @code {
-                    private List<Produto> ListarTodos = new();
-
-
-                    protected override void OnInitialized()
-                    {
-                        CarregarProduto();
-                    }
-
-                    private void CarregarProduto()
-                    {
-                        ListarTodos = ProdutoDAO.ListarTodos();
                     }
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+@{
+    foreach( var produto in listaProduto)
+    {
+        <!-- Modal Visualizar -->
+        <div class="modal fade" id="visualizar-@produto.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Visualizar Serviço </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="nome" class="mb-1">Nome do Produto:</label>
+                                <input class="form-control" value="@produto.Nome" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="codigo" class="mb-1">Código:</label>
+                                <input class="form-control" value="@produto.Codigo" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="prestador" class="mb-1">Prestador:</label>
+                                <input class="form-control" value="@produto.Quantidade" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label for="valor" class="mb-1">Valor:</label>
+                                <input class="form-control" value="@produto.Valor" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Excluir -->
+        <div class="modal fade" id="excluir-@produto.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <EditForm Model="produto" OnValidSubmit="@(() => Excluir(produto.Id))" FormName=@($"ProdutoExcluir{produto.Id}")>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Excluir cliente </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-center">Você tem certeza que deseja excluir o produto <strong>@produto.Nome</strong>?. Após a exclusão não será possível recuperar esse registro.</h5>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <a href="/ConsultaCliente" class="btn btn-info btn-lg" data-bs-dismiss="modal"> Cancelar</a>
+                            <button type="submit" class="btn btn-danger  btn-lg"> Deletar </button>
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    }
+}
+   
+
+@code {
+
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Produto produto1 { get; set; } = new();
+
+    private List<Produto> listaProduto = new();
+
+    protected override void OnInitialized()
+    {
+        CarregarProduto();
+        // buscar o serviço por id
+        var _produto = produtoDAO.BuscarProd(Id);
+        if (_produto != null)
+        {
+            produto1 = _produto;
+        }
+        else
+        {
+            erro = "Produto não encontrado!";
+        }
+    }
+
+    private void Excluir(int id)
+    {
+        try
+        {
+            produtoDAO.Deletar(id);
+            Navigation.NavigateTo("/ConsultarProduto", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            erro = ($"Erro ao excluir o produto: {ex.Message}");
+        }
+        CarregarProduto();
+    }
+
+    private void CarregarProduto()
+    {
+        listaProduto = produtoDAO.ListarProd();
+    }
+}

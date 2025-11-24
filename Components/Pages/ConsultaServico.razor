@@ -10,21 +10,17 @@
     </div>
     <div class="border p-4 rounded bg-white">
         <h2>Consultar Serviço 🔍</h2>
-
         <div class="search-bar">
             <input type="text" placeholder="Buscar">
             <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
             <a href="/CadastroServico" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar Novo Serviço</a>
         </div>
-
         <table>
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Serviço</th>
-                    <th>Código</th>
                     <th>Prestador</th>
-                    <th>Valor</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -36,9 +32,7 @@
                         <tr>
                             <td>@contador</td>
                             <td>@servico.Nome</td>
-                            <td>@servico.Codigo</td>
                             <td>@servico.Prestador</td>
-                            <td>@servico.Valor.ToString("C")</td>
                             <td>
                                 <a data-bs-toggle="modal" data-bs-target="#visualizar-@servico.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
                                 <a href="/Atualizar-servico-@servico.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
@@ -52,6 +46,8 @@
         </table>
     </div>
 </div>
+
+
 @{
     foreach (var servico in listaServico)
     {
@@ -66,7 +62,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-6 mb-3 mt-3">
-                                <label for="nome" class="mb-1">Nome do Cliente:</label>
+                                <label for="nome" class="mb-1">Nome do Serviço:</label>
                                 <input type="text" class="form-control" @bind-value="@servico.Nome" aria-label="nome" readonly />
                             </div>
                             <div class="col-6 mb-3 mt-3">
@@ -91,7 +87,7 @@
 
         <!-- Modal Excluir -->
         <div class="modal fade" id="excluir-@servico.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <EditForm Model="servico" OnValidSubmit="@(() => Excluir(servico.Id))" FormName=@($"ClienteExcluir{servico.Id}")>
+            <EditForm Model="servico" OnValidSubmit="@(() => Excluir(servico.Id))" FormName=@($"ServicoExcluir{servico.Id}")>
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-between">
@@ -111,9 +107,10 @@
         </div>
     }
 }
+
+
 @code {
 
-    /* buscar id do cliente */
     private string erro = string.Empty;
 
     [Parameter]
@@ -127,7 +124,7 @@
     protected override void OnInitialized()
     {
         CarregarServico();
-        // buscar o cliente por id
+        // buscar o serviço por id
         var _servico = servicoDAO.BuscarPorId(Id);
         if (_servico != null)
         {

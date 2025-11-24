@@ -19,7 +19,7 @@
         <h3>Editar Produto</h3>
         <p>Atualize as informações abaixo:</p>
 
-        <EditForm Model="produto" OnValidSubmit="Salvar">
+        <EditForm Model="produto" OnSubmit="Salvar" FormName="ProdutoAtualizar">
             <div class="row">
                 <div class="col-12 mb-3">
                     <label>Nome:</label>
@@ -44,27 +44,33 @@
 
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="/ConsultarProduto" class="btn btn-danger">Cancelar</a>
+                <a href="/ConsultaProduto" class="btn btn-danger">Cancelar</a>
             </div>
         </EditForm>
     </div>
 </div>
 
 @code {
-
-    private Produto produto = new();
     private string erro = string.Empty;
 
     [Parameter]
     public int Id { get; set; }
 
+    [SupplyParameterFromForm]
+
+    private Produto produto { get; set; } = new Produto();
+
     protected override void OnInitialized()
     {
-        var p = produtoDAO.BuscarProd(Id);
-        if (p != null)
-            produto = p;
+        var _produto = produtoDAO.BuscarProd(Id);
+        if (_produto != null)
+        {
+            produto = _produto;
+        }
         else
+        {
             erro = "Produto não encontrado!";
+        }
     }
 
     private void Salvar()
@@ -72,7 +78,7 @@
         try
         {
             produtoDAO.AtualizarProd(produto);
-            Navigation.NavigateTo("/ConsultarProduto", true);
+            Navigation.NavigateTo("/estoque");
         }
         catch (Exception ex)
         {

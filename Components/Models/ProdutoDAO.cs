@@ -77,7 +77,7 @@ public class ProdutoDAO
         try
         {
             var comando = _conexao.CreateCommand("UPDATE produto SET nome_pro = @_nomeProd, codigo_pro = @_codigo, quantidade_pro = @_quantidade, valor_pro = @_valorProd WHERE id_pro = @_id");
-            comando.Parameters.AddWithValue("@_nome", produto.Nome);
+            comando.Parameters.AddWithValue("@_nomeProd", produto.Nome);
             comando.Parameters.AddWithValue("@_codigo", produto.Codigo);
             comando.Parameters.AddWithValue("@_quantidade", produto.Quantidade);
             comando.Parameters.AddWithValue("@_valorProd", produto.Valor);
@@ -96,7 +96,7 @@ public class ProdutoDAO
     {
         try
         {
-            var comando = _conexao.CreateCommand("DELETE FROM produto WHERE id_pro = @_id");
+            var comando = _conexao.CreateCommand("DELETE FROM produto WHERE id_pro = @id");
             comando.Parameters.AddWithValue("@id", id);
             comando.ExecuteNonQuery();
 
