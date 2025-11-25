@@ -91,7 +91,8 @@ namespace AppBugaoMotoFVLE.Components.Models
         {
             try
             {
-                var comando = _conexao.CreateCommand("UPDATE fornecedor SET nome_empre_for = @_nome, nome_funcio_for = @_nome_funcio,  cnpj_for = @_cnpj, rua_for = @_rua,  bairro_for = @_bairro,  cidade_for = @_cidade, estado_for = @_estado, complemento_for = @_complemento, telefone_for = @_telefone WHERE id_for = @_id");
+                var comando = _conexao.CreateCommand("UPDATE fornecedor SET nome_empre_for = @_nome, nome_funcio_for = @_nome_funcio, " +
+                    " cnpj_for = @_cnpj, rua_for = @_rua,  bairro_for = @_bairro,  cidade_for = @_cidade, estado_for = @_estado, complemento_for = @_complemento, telefone_for = @_telefone WHERE id_for = @_id");
                 comando.Parameters.AddWithValue("@_nome", fornecedor.Nome);
                 comando.Parameters.AddWithValue("@_nome_funcio", fornecedor.Responsavel);
                 comando.Parameters.AddWithValue("@_cnpj", fornecedor.CNPJ);
@@ -102,6 +103,7 @@ namespace AppBugaoMotoFVLE.Components.Models
                 comando.Parameters.AddWithValue("@_complemento", fornecedor.Complemento);
                 comando.Parameters.AddWithValue("@_telefone", fornecedor.Telefone);
                 comando.Parameters.AddWithValue("@_id", fornecedor.Id);
+                comando.ExecuteNonQuery();
             }
             catch
             {
