@@ -83,7 +83,6 @@
                             <h1 class="modal-title fs-5"> Visualizar Fornecedor </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-12 mb-3 mt-3">
@@ -91,7 +90,6 @@
                                     <input type="text" class="form-control" value="@fornecedorLocal.Nome" readonly />
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 mb-3 mt-3">
                                     <label class="mb-1">Telefone:</label>
@@ -102,34 +100,29 @@
                                     <input type="text" class="form-control" value="@fornecedorLocal.CNPJ'" readonly />
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 mb-3 mt-3">
                                     <label class="mb-1">Cidade:</label>
                                     <input type="text" class="form-control" value="@fornecedorLocal.Cidade" readonly />
                                 </div>
-
                                 <div class="col-6 mb-3 mt-3">
                                     <label class="mb-1">Estado:</label>
                                     <input type="text" class="form-control" value="@fornecedorLocal.Estado" readonly />
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-6 mb-3 mt-3">
                                     <label class="mb-1">Rua:</label>
                                     <input type="text" class="form-control" value="@fornecedorLocal.Rua" readonly />
                                 </div>
-
                                 <div class="col-6 mb-3 mt-3">
                                     <label class="mb-1">Bairro:</label>
                                     <input type="text" class="form-control" value="@fornecedorLocal.Bairro" readonly />
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-12 mb-3 mt-3">
-                                    <label class="mb-1">Complemento:</label>
+                                    <label class="mb-1"   >Complemento:</label>
                                     <textarea class="form-control" readonly>@fornecedorLocal.Complemento</textarea>
                                 </div>
                             </div>
@@ -139,17 +132,14 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="excluir-@fornecedorLocal.Id" tabindex="-1"
-                 aria-labelledby="excluirLabel-@fornecedorLocal.Id" aria-hidden="true">
-
-                <div class="modal-dialog">
+            <div class="modal fade" id="excluir-@fornecedorLocal.Id" tabindex="-1" aria-labelledby="excluirLabel-@fornecedorLocal.Id" aria-hidden="true">
+                <EditForm Model="fornecedor" OnValidSubmit="@(() => Excluir(fornecedor.Id))" FormName=@($"fornecedorExcluir{fornecedor.Id}")>
+                 <div class="modal-dialog">
                     <div class="modal-content">
-
                         <div class="modal-header d-flex justify-content-between">
                             <h1 class="modal-title fs-5">Excluir Fornecedor</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-
                         <div class="modal-body">
                             <h5 class="text-center">
                                 Tem certeza que deseja excluir o(a) fornecedor
@@ -157,49 +147,68 @@
                                 Após excluir, não será possível recuperar.
                             </h5>
                         </div>
-
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
-
-                            <button class="btn btn-danger" @onclick="() => Excluir(fornecedorLocal.Id)">
-                                Deletar
-                            </button>
+                            <button class="btn btn-danger" @onclick="() =>Excluir(fornecedorLocal.Id)">Deletar</button>
                         </div>
-
                     </div>
                 </div>
+                </EditForm>
             </div>
-
         }
+   
+        
+    }
     }
 </div>
 
+
+
 @code {
+    private string erro = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Fornecedor fornecedor1 { get; set; } = new();
 
     private List<Fornecedor> listaFornecedor = new();
-    private string erro = string.Empty;
+
 
     protected override void OnInitialized()
     {
         CarregarFornecedor();
+        var _forncedor = fornecedorDAO.BuacarIdFone(Id);
+        if (_forncedor != null)
+        {
+            fornecedor1 = _forncedor;
+        }
+        else
+        {
+            erro = "Fornecedor não encontrado!";
+        }
     }
-
-    private void CarregarFornecedor()
-    {
-        listaFornecedor = fornecedorDAO.ListarFornecedores() ?? new List<Fornecedor>();
-    }
-
     private void Excluir(int id)
     {
         try
         {
             fornecedorDAO.DeletarFor(id);
-            CarregarFornecedor();
+            Navigation.NavigateTo("/ConsultaFornecedor");
+
 
         }
         catch (Exception ex)
         {
             erro = $"Erro ao excluir fornecedor: {ex.Message}";
         }
+        CarregarFornecedor();
+    }
+    private void CarregarFornecedor()
+    {
+        listaFornecedor = fornecedorDAO.ListarFornecedores() ?? new List<Fornecedor>();
     }
 }
+ 
+
+

@@ -1,4 +1,4 @@
-﻿@page "/ConsultarProduto"
+﻿@*    page "/ConsultarProduto"
 
 @using AppBugaoMotoFVLE.Components.Models;
 @inject ProdutoDAO produtoDAO
@@ -53,7 +53,9 @@
         </table>
     </div>
 
-    @* MODAIS — VISUALIZAR E EXCLUIR *@
+
+
+
     @foreach (var prod in listaProduto)
     {
         var produtoLocal = prod;
@@ -140,3 +142,4 @@
         }
     }
 }
+ *@
