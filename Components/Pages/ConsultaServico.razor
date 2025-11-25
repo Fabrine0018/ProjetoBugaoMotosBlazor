@@ -4,48 +4,48 @@
 @inject ServicoDAO servicoDAO
 @inject NavigationManager navigation
 
-<div class="container-md pt-3">
-    <div class="breadcrumb">
-        <a href="/"> Home </a> • <a>Consultar Serviço</a>
-    </div>
-    <div class="border p-4 rounded bg-white">
-        <h2>Consultar Serviço 🔍</h2>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <button class="btn btn-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
-            <a href="/CadastroServico" class="btn btn-add"><i class="fi fi-sr-user-add"></i> Adicionar Novo Serviço</a>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Serviço</th>
-                    <th>Prestador</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    int contador = 1;
-                    @foreach (var servico in listaServico)
-                    {
-                        <tr>
-                            <td>@contador</td>
-                            <td>@servico.Nome</td>
-                            <td>@servico.Prestador</td>
-                            <td>
-                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@servico.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
-                                <a href="/Atualizar-servico-@servico.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
-                                <a data-bs-toggle="modal" data-bs-target="#excluir-@servico.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
-                            </td>
-                        </tr>
-                        contador++;
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
+<div class="breadcrumb">
+    <a href="/"> Home </a> • <a>Consultar Serviço</a>
 </div>
+
+<div class="border p-4 rounded bg-white">
+    <h2>Consultar Serviço 🔍</h2>
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar">
+        <button class="btn btn-filter"> Filtrar</button>
+        <a href="/CadastroServico" class="btn btn-add"> Adicionar Novo Serviço</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Serviço</th>
+                <th>Prestador</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int contador = 1;
+                @foreach (var servico in listaServico)
+                {
+                    <tr>
+                        <td>@contador</td>
+                        <td>@servico.Nome</td>
+                        <td>@servico.Prestador</td>
+                        <td>
+                            <a data-bs-toggle="modal" data-bs-target="#visualizar-@servico.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
+                            <a href="/Atualizar-servico-@servico.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
+                            <a data-bs-toggle="modal" data-bs-target="#excluir-@servico.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
+                        </td>
+                    </tr>
+                    contador++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 
 
 @{

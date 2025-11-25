@@ -12,7 +12,7 @@
 
 <div class="container-md pt-3">
     <div class="breadcrumb">
-        <a href="/"> Home </a> • <a href="/ConsultarProduto"> Consultar Produto </a> • Editar Produto
+        <a href="/"> Home </a> • <a href="/ConsultaProduto"> Consultar Produto </a> • Editar Produto
     </div>
 
     <div class="border p-4 rounded">
@@ -78,7 +78,7 @@
         try
         {
             produtoDAO.AtualizarProd(produto);
-            Navigation.NavigateTo("/estoque");
+            Navigation.NavigateTo("/ConsultaEstoque");
         }
         catch (Exception ex)
         {

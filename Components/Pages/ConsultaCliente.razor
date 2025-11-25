@@ -4,134 +4,136 @@
 @inject ClienteDAO clienteDAO
 @inject NavigationManager Navigation;
 
-<div class="container-md pt-3">
-    <div class="breadcrumb">
-        <a href="/"> Home </a> • <a> Consultar Cliente </a>
+
+<ol class="breadcrumb border-start">
+    <li class="breadcrumb-item"> <a href="/"> Início </a> </li>
+    <li class="breadcrumb-item active"> <a class="active"> Consultar: Cliente </a> </li>
+</ol>
+
+
+<div class="border p-4 rounded bg-white">
+    <h2>Consultar Cliente 🔍</h2>
+
+    <div class="search-bar mb-3 d-flex gap-2">
+        <input type="text" placeholder="Buscar" class="form-control" />
+        <button class="btn btn-filter"> Filtrar</button>
+        <a href="/CadastroCliente" class="btn btn-add"> Adicionar novo cliente</a>
     </div>
 
-    <div class="border p-4 rounded bg-white">
-        <h2>Consultar Cliente 🔍</h2>
-
-        <div class="search-bar mb-3 d-flex gap-2">
-            <input type="text" placeholder="Buscar" class="form-control" />
-            <button class="btn btn-filter"> <i class="fa-solid fa-filter"></i> Filtrar</button>
-            <a href="/CadastroCliente" class="btn btn-add"> <i class="fi fi-sr-user-add"></i> Adicionar novo cliente</a>
-        </div>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th># </th>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    int contador = 1;
-                    foreach (var cliente in listaCliente)
-                    {
-                        <tr>
-                            <td> @contador </td>
-                            <td>@cliente.Nome</td>
-                            <td>@cliente.Telefone</td>
-                            <td>
-                                <a data-bs-toggle="modal" data-bs-target="#visualizar-@cliente.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
-                                <a href="/Atualizar-Cliente-@cliente.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
-                                <a data-bs-toggle="modal" data-bs-target="#excluir-@cliente.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
-                            </td>
-                        </tr>
-                        contador++;
-                    }
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th># </th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int contador = 1;
+                foreach (var cliente in listaCliente)
+                {
+                    <tr>
+                        <td> @contador </td>
+                        <td>@cliente.Nome</td>
+                        <td>@cliente.Telefone</td>
+                        <td>
+                            <a data-bs-toggle="modal" data-bs-target="#visualizar-@cliente.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
+                            <a href="/Atualizar-Cliente-@cliente.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
+                            <a data-bs-toggle="modal" data-bs-target="#excluir-@cliente.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
+                        </td>
+                    </tr>
+                    contador++;
                 }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
+ 
 
-    @{
-        foreach (var cliente in listaCliente)
-        {
-            <!-- Modal Visualizar -->
-            <div class="modal fade" id="visualizar-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header d-flex justify-content-between">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Visualizar Serviço </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+@{
+    foreach (var cliente in listaCliente)
+    {
+        <!-- Modal Visualizar -->
+        <div class="modal fade" id="visualizar-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> Visualizar Serviço </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3 mt-3">
+                                <label class="mb-1">Nome do Cliente:</label>
+                                <input type="text" class="form-control" value="@cliente.Nome" readonly />
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-12 mb-3 mt-3">
-                                    <label class="mb-1">Nome do Cliente:</label>
-                                    <input type="text" class="form-control" value="@cliente.Nome" readonly />
-                                </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">Telefone:</label>
+                                <input type="text" class="form-control" value="@cliente.Telefone" readonly />
                             </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">Telefone:</label>
-                                    <input type="text" class="form-control" value="@cliente.Telefone" readonly />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">CPF:</label>
-                                    <input type="text" class="form-control" value="@cliente.Cpf" readonly />
-                                </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">CPF:</label>
+                                <input type="text" class="form-control" value="@cliente.Cpf" readonly />
                             </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">Cidade:</label>
-                                    <input type="text" class="form-control" value="@cliente.Cidade" readonly />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">Estado:</label>
-                                    <input type="text" class="form-control" value="@cliente.Estado" readonly />
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">Cidade:</label>
+                                <input type="text" class="form-control" value="@cliente.Cidade" readonly />
                             </div>
-                            <div class="row">
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">Rua:</label>
-                                    <input type="text" class="form-control" value="@cliente.Rua" readonly />
-                                </div>
-                                <div class="col-6 mb-3 mt-3">
-                                    <label class="mb-1">Bairro:</label>
-                                    <input type="text" class="form-control" value="@cliente.Bairro" readonly />
-                                </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">Estado:</label>
+                                <input type="text" class="form-control" value="@cliente.Estado" readonly />
                             </div>
-                            <div class="row">
-                                <div class="col-12 mb-3 mt-3">
-                                    <label class="mb-1">Complemento:</label>
-                                    <textarea class="form-control" readonly>@cliente.Complemento</textarea>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">Rua:</label>
+                                <input type="text" class="form-control" value="@cliente.Rua" readonly />
+                            </div>
+                            <div class="col-6 mb-3 mt-3">
+                                <label class="mb-1">Bairro:</label>
+                                <input type="text" class="form-control" value="@cliente.Bairro" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mb-3 mt-3">
+                                <label class="mb-1">Complemento:</label>
+                                <textarea class="form-control" readonly>@cliente.Complemento</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Modal Excluir -->
-            <div class="modal fade" id="excluir-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <EditForm Model="cliente" OnValidSubmit="@(() => Excluir(cliente.Id))" FormName=@($"ClienteExcluir{cliente.Id}")>
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header d-flex justify-content-between">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel"> Excluir cliente </h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <h5 class="text-center">Você tem certeza que deseja excluir o(a) cliente <strong>@cliente.Nome</strong>?. Após a exclusão não será possível recuperar esse registro.  </h5>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <a href="/ConsultaCliente" class="btn btn-info btn-lg" data-bs-dismiss="modal"> Cancelar</a>
-                                <button type="submit" class="btn btn-danger  btn-lg"> Deletar </button>
-                            </div>
+        <!-- Modal Excluir -->
+        <div class="modal fade" id="excluir-@cliente.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <EditForm Model="cliente" OnValidSubmit="@(() => Excluir(cliente.Id))" FormName=@($"ClienteExcluir{cliente.Id}")>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"> Excluir cliente </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 class="text-center">Você tem certeza que deseja excluir o(a) cliente <strong>@cliente.Nome</strong>?. Após a exclusão não será possível recuperar esse registro.  </h5>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <a href="/ConsultaCliente" class="btn btn-info btn-lg" data-bs-dismiss="modal"> Cancelar</a>
+                            <button type="submit" class="btn btn-danger  btn-lg"> Deletar </button>
                         </div>
                     </div>
-                </EditForm>
-            </div>
-        }
+                </div>
+            </EditForm>
+        </div>
     }
+}
 
-</div>
 
 @code {
 
