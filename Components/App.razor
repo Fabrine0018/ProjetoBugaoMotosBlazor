@@ -21,9 +21,24 @@
     <PageTitle>Bugao Motos</PageTitle>
 </head>
 
-<body>
+<body onload="tempo()">
     <Routes />
-    <script src="_framework/blazor.web.js"></script>
+    <script>
+        function tempo() {
+            agora = new Date;
+            const mes_tratado = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+            meses = agora.getMonth();
+            dia = agora.getDate();
+            ano = agora.getFullYear();
+            hora = agora.getHours();
+            minutos = agora.getMinutes();
+
+            document.getElementById("data").innerHTML = `${dia}/${mes_tratado[meses]}/${ano}`;
+            document.getElementById("hora").innerHTML = `${hora}:${minutos}`;
+            setTimeout('time()', 500);
+
+        }
+    </script>
 </body>
 
 </html>

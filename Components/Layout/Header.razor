@@ -1,8 +1,25 @@
 ﻿<header class="container-fluid bg-white d-flex justify-content-between align-items-center text-dark p-3 px-4 border-bottom"
         style="margin-left: 0px; margin-right: 0px">
-    <h1 class="h1">Início</h1>
+    <h1 class="h1">Olá, bem-vindo!</h1>
     <div class="col-6 flex-column">
-        <h4 class="h6 text-end">19:43</h4>
-        <h4 class="h6 text-end">21/11/2025</h4>
+        <h4 class="h6 text-end" id="data">21/11/2025</h4>
+        <h4 class="h6 text-end" id="hora">19:43</h4>
     </div>
 </header>
+
+<script>
+
+    function tempo() {
+        atual = new Date;
+        dia = agora.getDate();
+        mes_tratado = new array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+        ano = agora.getFullYear();
+        hora = agora.getHours();
+        minutos = agora.getMinutes();
+
+        document.getElementById("data").innerHTML = dia + "/" + mes_tratado[agora.getMonth] + "/" + ano;
+        document.getElementById("hora").innerHTML = hora + ":" + minutos;
+        setTimeout('time()', 500);
+
+    }
+</script>

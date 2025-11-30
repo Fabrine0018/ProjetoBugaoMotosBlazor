@@ -11,11 +11,14 @@
         @erro
     </div>
 }
-    <div class="breadcrumb ">
-        <a href="#">Home</a> > <a href="#">Cadastrar: Produto</a>
-    </div>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Cadastrar: <span> Produto </span> </a></li>
+</ol>
+
 <div class="border p-4 rounded bg-white">
-    <div class="border-left">
+    <div class="borda-esquerda">
         <h3>Cadastro do produto</h3>
         <p>Preencha todas as informações corretamente</p>
     </div>
@@ -24,14 +27,23 @@
         <input @bind-value="_novoProduto!.Nome" type="text" placeholder="Nome do Produto">
 
         <div class="row">
-            <div><input @bind-value="_novoProduto!.Codigo" type="text" placeholder="Código"></div>
-            <div><input @bind-value="_novoProduto!.Quantidade" type="number" placeholder="Quantidade"></div>
-            <div><input @bind-value="_novoProduto!.Valor" type="number" step="0.01" placeholder="Valor (R$)"></div>
+            <div class="col-4">
+                <label>Código:</label>
+                <input @bind-value="_novoProduto!.Codigo" type="text" placeholder="001">
+                </div>
+            <div class="col-4">
+                <label>Quantidade:</label>
+                <input @bind-value="_novoProduto!.Quantidade" type="number" >
+                </div>
+            <div class="col-4">
+                <label>Valor Unitário:</label>
+                <input @bind-value="_novoProduto!.Valor" type="text" placeholder="R$0,00">
+                </div>
         </div>
 
-        <div class="buttons">
+        <div class="grupo-botao">
+            <a href="/ConsultaProduto" class="btn-deletar">Cancelar</a>
             <button type="submit" class="btn-salvar">Salvar</button>
-            <button class="btn-deletar">Deletar</button>
         </div>
     </EditForm>
 </div>

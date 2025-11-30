@@ -12,17 +12,15 @@
 
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
-    <li class="breadcrumb-item active"> <a class="active"> Consultar: <span> Produto </span> </a></li>
+    <li class="breadcrumb-item"> <a href="/ConsultaProduto"> Consultar: Produto </a></li>
+    <li class="breadcrumb-item active"> <a class="active"> Atualizar: <span> Produto </span> </a></li>
 </ol>
 
-<div class="container-md pt-3">
-    <div class="breadcrumb">
-        <a href="/"> Home </a> • <a href="/ConsultaProduto"> Consultar Produto </a> • Editar Produto
-    </div>
-
-    <div class="border p-4 rounded">
+<div class="border p-4 rounded bg-white">
+    <div class="borda-esquerda">
         <h3>Editar Produto</h3>
-        <p>Atualize as informações abaixo:</p>
+        <p>Atualize as informações que deseja abaixo:</p>
+    </div>
 
         <EditForm Model="produto" OnSubmit="Salvar" FormName="ProdutoAtualizar">
             <div class="row">
@@ -30,29 +28,30 @@
                     <label>Nome:</label>
                     <input class="form-control" @bind-value="produto.Nome" />
                 </div>
-
-                <div class="col-6 mb-3">
+            </div>
+            <div class="row">
+                <div class="col-4 mb-3">
                     <label>Código:</label>
                     <input class="form-control" @bind-value="produto.Codigo" />
                 </div>
 
-                <div class="col-6 mb-3">
+                <div class="col-4 mb-3">
                     <label>Quantidade:</label>
                     <input class="form-control" @bind-value="produto.Quantidade" />
                 </div>
 
-                <div class="col-12 mb-3">
+                <div class="col-4 mb-3">
                     <label>Valor:</label>
                     <input class="form-control" @bind-value="produto.Valor" />
                 </div>
             </div>
-
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="/ConsultaProduto" class="btn btn-danger">Cancelar</a>
+            <div class="row">
+                <div class="buttons">
+                    <button href="/ConsultaProduto" class="btn-deletar">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar Edição</button>
+                </div>
             </div>
         </EditForm>
-    </div>
 </div>
 
 @code {

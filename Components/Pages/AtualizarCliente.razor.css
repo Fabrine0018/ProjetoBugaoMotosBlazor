@@ -21,7 +21,6 @@ a > span {
     font-weight: bold;
 }
 
-
 input, select, textarea {
     height: 46px;
     padding: 10px;
@@ -31,33 +30,44 @@ input, select, textarea {
     box-sizing: border-box;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 .btn-salvar {
-    background-color: #009e0f;
+    background-color: #21B570;
     color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-deletar {
+    text-align: center;
+    background-color: #C82333;
     padding: 12px 20px;
     border: none;
     border-radius: 6px;
     font-weight: 600;
-    width: 100%;
-    cursor: pointer;
-}
-.buttons[b-oeu6s2lg5o] {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px; /* garante que não fiquem colados */
-}
-
-
-
-.btn-deletar {
-    background-color: #e53935;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    width: 100%;
+    text-decoration: none;
+    width: 50%;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-deletar:hover {
+    background-color: #B6202E;
+}
+
+.btn-salvar:hover {
+    background-color: #1EA465;
 }
 
 .divider {
