@@ -13,11 +13,10 @@
     </div>
 }
 
-<div class="breadcrumb ">
-    <a href="#">Home</a> > <a href="#">Cadastrar: Cliente</a>
-</div>
-
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Cadastrar: <span> Cliente </span> </a></li>
+</ol>
 
 <div class="border p-4 rounded bg-white">
 
@@ -26,36 +25,31 @@
         <p>Preencha todas as informações corretamente</p>
     </div>
 
-
     <EditForm Model="_novoCliente" OnSubmit="Salvar" FormName="CadastrarCliente">
     <input @bind-value="_novoCliente!.Nome"  type="text" placeholder="Nome">
     <div class="row">
-        <div><input @bind-value="_novoCliente!.Telefone" type="text" placeholder="Telefone"></div>
-        <div><input @bind-value="_novoCliente!.Cpf" type="text" placeholder="CPF"></div>
+        <div class="col-6"><input @bind-value="_novoCliente!.Telefone" type="text" placeholder="Telefone"></div>
+        <div class="col-6"><input @bind-value="_novoCliente!.Cpf" type="text" placeholder="CPF"></div>
     </div>
 
     <div class="divider"></div>
+    <div class="row">
+        <div class="col-6"><input @bind-value="_novoCliente!.Rua" type="text" placeholder="Rua"></div>
+        <div class="col-6"><input @bind-value="_novoCliente!.Bairro" type="text" placeholder="Bairro"></div>
+    </div>
+    <div class="row">
 
-    <div class="row-3">
-
-        <div>
+        <div class="col-6">
             <input @bind-value="_novoCliente!.Estado" type="text" placeholder="Estado">
         </div>
-        <div>
+        <div class="col-6">
             <input @bind-value="_novoCliente!.Cidade" type="text" placeholder="Cidade">
         </div>
     </div>
-
-    <div class="row">
-        <div><input @bind-value="_novoCliente!.Rua"  type="text" placeholder="Rua"></div>
-        <div><input @bind-value="_novoCliente!.Bairro" type="text" placeholder="Bairro"></div>
-    </div>
-
-    <textarea rows="4" placeholder="Complemento">@_novoCliente.Complemento </textarea>
-
+        <input @bind-value="_novoCliente!.Complemento" type="text" placeholder="Complemento">
     <div class="buttons">
+        <button class="btn-deletar">Cancelar</button>
         <button type="submit" class="btn-salvar">Salvar</button>
-        <button class="btn-deletar">Deletar</button>
 
     </div>
     </EditForm>

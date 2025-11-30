@@ -5,19 +5,19 @@
 @inject NavigationManager Navigation;
 
 
-<ol class="breadcrumb border-start">
-    <li class="breadcrumb-item"> <a href="/"> Início </a> </li>
-    <li class="breadcrumb-item active"> <a class="active"> Consultar: Cliente </a> </li>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Consultar: <span> Cliente </span> </a></li>
 </ol>
 
-
 <div class="border p-4 rounded bg-white">
-    <h2>Consultar Cliente 🔍</h2>
+    <h2 style="border-left: 2px solid black;padding-left: 12px;">
+        Consultar Cliente 🔍
+    </h2>
 
     <div class="search-bar mb-3 d-flex gap-2">
         <input type="text" placeholder="Buscar" class="form-control" />
-        <button class="btn btn-filter"> Filtrar</button>
-        <a href="/CadastroCliente" class="btn btn-add"> Adicionar novo cliente</a>
+        <a href="/CadastroCliente" class="btn btn-add"> <i class="bi bi-plus-lg"></i> Novo Cliente</a>
     </div>
 
     <table class="table table-striped">
@@ -26,7 +26,7 @@
                 <th># </th>
                 <th>Nome</th>
                 <th>Telefone</th>
-                <th>Ações</th>
+                <th class="col-2 text-center">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -39,9 +39,9 @@
                         <td>@cliente.Nome</td>
                         <td>@cliente.Telefone</td>
                         <td>
-                            <a data-bs-toggle="modal" data-bs-target="#visualizar-@cliente.Id" class="btn btn-dark"> <i class="bi bi-eye-fill"></i> </a>
-                            <a href="/Atualizar-Cliente-@cliente.Id" class="btn btn-info"> <i class="bi bi-pencil-square"></i> </a>
-                            <a data-bs-toggle="modal" data-bs-target="#excluir-@cliente.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i> </a>
+                            <a data-bs-toggle="modal" data-bs-target="#visualizar-@cliente.Id" class="btn btn-dark"> <i class="bi bi-eye-fill text-white"></i> </a>
+                            <a href="/Atualizar-Cliente-@cliente.Id" class="btn btn-info"> <i class="bi bi-pencil-square text-white"></i> </a>
+                            <a data-bs-toggle="modal" data-bs-target="#excluir-@cliente.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill text-white"></i> </a>
                         </td>
                     </tr>
                     contador++;
@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-12 mb-3 mt-3">
                                 <label class="mb-1">Complemento:</label>
-                                <textarea class="form-control" readonly>@cliente.Complemento</textarea>
+                                <textarea class="form-control" readonly value="@cliente.Complemento"> </textarea>
                             </div>
                         </div>
                     </div>

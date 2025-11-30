@@ -13,68 +13,72 @@
         <span class="block sm:inline">@erro</span>
     </div>
 }
-<div class="container-md pt-3">
-    <div class="breadcrumb">
-        <a href="/"> Home </a> • <a href="/ConsultaCliente"> Consultar: Clientes </a> • <a> Editar: Cliente </a>
-    </div>
-  
-    <div class="border p-4 rounded bg-white">
 
-        <div class="border-left">
-            <h3>Editar Cliente</h3>
-            <p>Preencha as informações que deseja editar </p>
-        </div>
-      
-        <EditForm Model="cliente" OnSubmit="Salvar" FormName="ClienteAtualizar">
-            <div class="row">
-                <div class="col-12 mb-3 mt-3">
-                    <label for="nome" class="mb-1">Nome do Cliente:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Nome" aria-label="nome" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 mb-3">
-                    <label for="telefone" class="mb-1">Telefone:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Telefone" aria-label="telefone" />
-                </div>
-                <div class="col-6 mb-3">
-                    <label for="CPF" class="mb-1">CPF:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Cpf" aria-label="CPF" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 mb-3">
-                    <label for="cidade" class="mb-1">Cidade:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Cidade" aria-label="cidade" />
-                </div>
-                <div class="col-6 mb-3">
-                    <label for="estado" class="mb-1">Estado:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Estado" aria-label="estado" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 mb-3 ">
-                    <label for="rua" class="mb-1">Rua:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Rua" aria-label="rua" />
-                </div>
-                <div class="col-6 mb-3 ">
-                    <label for="bairro" class="mb-1">Bairro:</label>
-                    <input type="text" class="form-control" @bind-value="@cliente.Bairro" aria-label="bairro" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 mb-3 ">
-                    <label for="complemento" class="mb-1">Complemento:</label>
-                    <textarea class="w-auto"> @cliente.Complemento </textarea>
-                </div>
-            </div>
-            <div class=" d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Salvar Edição </button>
-                <button class="btn btn-danger">Cancelar</button>
-            </div>
-        </EditForm>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item"> <a href="/ConsultaCliente"> Consultar: Cliente </a></li>
+    <li class="breadcrumb-item active"> <a class="active"> Atualizar: <span> Cliente </span> </a></li>
+</ol>
+
+
+<div class="border p-4 rounded bg-white">
+
+    <div class="borda-esquerda">
+        <h3>Editar Cliente</h3>
+        <p>Preencha as informações que deseja editar </p>
     </div>
+      
+    <EditForm Model="cliente" OnSubmit="Salvar" FormName="ClienteAtualizar">
+        <div class="row">
+            <div class="col-12 mb-3 mt-2">
+                <label for="nome" class="mb-1">Nome do Cliente:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Nome" aria-label="nome" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 mb-3">
+                <label for="telefone" class="mb-1">Telefone:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Telefone" aria-label="telefone" />
+            </div>
+            <div class="col-4 mb-3">
+                <label for="CPF" class="mb-1">CPF:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Cpf" aria-label="CPF" />
+            </div>
+            <div class="col-4 mb-3">
+                <label for="cidade" class="mb-1">Cidade:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Cidade" aria-label="cidade" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 mb-3 ">
+                <label for="rua" class="mb-1">Rua:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Rua" aria-label="rua" />
+            </div>
+            <div class="col-4 mb-3 ">
+                <label for="bairro" class="mb-1">Bairro:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Bairro" aria-label="bairro" />
+            </div>
+            <div class="col-4 mb-3">
+                <label for="estado" class="mb-1">Estado:</label>
+                <input type="text" class="form-control" @bind-value="@cliente.Estado" aria-label="estado" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3 d-flex flex-column">
+                <label for="complemento" class="mb-1">Complemento:</label>
+                <input @bind-value="@cliente.Complemento" type="text">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="buttons">
+                <button class="btn-deletar">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Edição </button>
+            </div>
+        </div>
+    </EditForm>
 </div>
+
 
 @code {
     private string erro = string.Empty;

@@ -1,4 +1,5 @@
-﻿.container {
+﻿
+.container {
 background: #fff;
 border: 1px solid #c7c7c7;
 border-radius: 6px;
@@ -41,25 +42,31 @@ justify-content: center;
 background: #1a242f;
 }
 
-.breadcrumb {
+.breadcrumb-item > a {
     font-size: 16px;
     margin-bottom: 10px;
-    color: #343a40;
-    background: none;
+    color: #212529;
+    text-decoration: none;
+    font-weight: 500;
 }
 
-a .active {
+.breadcrumb{
+    background: none;
+}
+a > span {
     color: #0dcaf0;
     text-decoration: none;
     font-weight: bold;
 }
 
 h2 {
-font-size: 20px;
-margin-bottom: 15px;
-display: flex;
-align-items: center;
-gap: 10px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 2px solid black;
+    padding-left: 12px;
 }
 
 .search-bar {
@@ -86,36 +93,12 @@ color: #fff;
 transition: 0.3s;
 }
 
-.btn-filter {
-background: #2c3e50;
-}
-
-.btn-filter:hover {
-background: #1a242f;
-}
-
 .btn-add {
 background: #34495e;
 }
 
 .btn-add:hover {
 background: #22313f;
-}
-
-table {
-width: 100%;
-border-collapse: collapse;
-margin-top: 10px;
-}
-
-table thead {
-background: #e6e9ed;
-}
-
-table th, table td {
-padding: 12px;
-text-align: left;
-border-bottom: 1px solid #ddd;
 }
 
 .btn-view {
