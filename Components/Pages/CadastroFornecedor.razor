@@ -40,14 +40,12 @@
                 <input @bind-value="_novoFornecedor!.Cidade" type="text" placeholder="Cidade">
             </div>
         </div>
-
+        <input @bind-value="_novoFornecedor!.Complemento" type="text" placeholder="Complemento">
         <div class="row">
             <div><input @bind-value="_novoFornecedor!.Rua" type="text" placeholder="Rua"></div>
             <div><input @bind-value="_novoFornecedor!.Bairro" type="text" placeholder="Bairro"></div>
         </div>
-
-        <textarea rows="4" placeholder="Complemento"> </textarea> <!-- Ver como cadastra com text area-->
-
+       
         <div class="buttons">
             <button type="submit" class="btn-salvar">Salvar</button>
             <button class="btn-deletar">Deletar</button>
