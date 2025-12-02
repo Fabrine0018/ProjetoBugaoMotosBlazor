@@ -19,10 +19,6 @@
     
     <HeadOutlet />
     <PageTitle>Bugao Motos</PageTitle>
-</head>
-
-<body onload="tempo()">
-    <Routes />
     <script>
         function tempo() {
             agora = new Date;
@@ -39,6 +35,11 @@
 
         }
     </script>
-</body>
+</head>
 
+<body onload="tempo()">
+    <Routes />
+
+    <script src="_framework/blazor.web.js"></script>
+</body>
 </html>

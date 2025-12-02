@@ -25,7 +25,7 @@
         <p>Preencha todas as informações corretamente</p>
     </div>
 
-    <EditForm Model="_novoCliente" OnSubmit="Salvar" FormName="CadastrarCliente">
+    <EditForm Model="_novoCliente" OnSubmit="Salvar">
     <input @bind-value="_novoCliente!.Nome"  type="text" placeholder="Nome">
     <div class="row">
         <div class="col-6"><input @bind-value="_novoCliente!.Telefone" type="text" placeholder="Telefone"></div>
