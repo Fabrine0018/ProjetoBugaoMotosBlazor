@@ -1,4 +1,266 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
-<h1> home </h1>
+<PageTitle>Início</PageTitle>
+
+<style>
+    #borda-esquerda {
+        border-left: 4px solid #666;
+        padding-left: 10px;
+    }
+
+    .ponto {
+        background-color: green;
+        width: 12px;
+        height: 12px;
+        color: green;
+        border-radius: 100%;
+    }
+    .icon-img {
+        background-color: #0dcaf0;
+        width: 6em;
+        height: 6em;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .status_est {
+        background-color: #e5e8eb;
+        color: green;
+        border: 2px solid green;
+        font-size: 1em;
+        font-weight: 700;
+        margin: 0;
+        cursor: default;
+        padding: 8px 12px;
+        border-radius: 100px;
+        width: 10em;
+    }
+    .btn-ca {
+        width: 10em;
+        background: #0dcaf0;
+        border: none;
+        padding: 8px 12px;
+        font-weight: 700;
+        border-radius: 8px;
+        color: white !important;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 20px;
+        gap: 16px;
+    }
+
+    .btn-salvarCai {
+        background-color: #21B570;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        width: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-cancelar {
+        text-align: center;
+        background-color: #C82333;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        width: 50%;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-cancelar:hover {
+        background-color: #B6202E;
+    }
+
+    .btn-salvarCai:hover {
+        background-color: #1EA465;
+    }
+</style>
+
+<div class="container-fluid p-4">
+
+    <div class="row mb-3" id="borda-esquerda">
+        <div class="col-6">
+            <h2> Caixa</h2>
+        </div>
+        <div class="col-6 d-flex justify-content-end gap-3 p-0">
+            <button id="btn-status" class="status_est">● Status: Aberto</button>
+            <a data-bs-target="#abrir_caixa"
+               data-bs-toggle="modal"
+               class="btn-ca"
+               id="btn-caixa">
+                Abrir caixa
+            </a>
+        </div>
+    </div>
+    <div class="row mb-3" >
+        <div class="container-fluid m-0 p-0 d-flex justify-content-between gap-3">
+            <div class="container-fluid border rounded p-3 bg-white">
+                <div class="card-body">
+                    <div class="icon-img">
+                        <i class="bi bi-plus-lg text-white" style="font-size: 3rem"></i>
+                    </div>
+                    <p class="mt-2 p-0 mb-0">Entrada em Caixa:</p>
+                    <p class="fw-bold fs-4" id="txt-entrada">R$ 50,00</p>
+                </div>
+            </div>
+            <div class="container-fluid border rounded p-3 bg-white">
+                <div class="card-body">
+                    <div class="icon-img">
+                        <i class="bi bi-dash-lg text-white" style="font-size: 3rem"></i>
+                    </div>
+                    <p class="mt-2 p-0 mb-0">Saída do Caixa:</p>
+                    <p class="fw-bold fs-4" id="txt-saida">R$ 50,00</p>
+                </div>
+            </div>
+            <div class="container-fluid border rounded p-3 bg-white">
+                <div class="card-body">
+                    <div class="icon-img">
+                        <i class="bi bi-cart-check text-white" style="font-size: 3rem"></i>
+                    </div>
+                    <p class="mt-2 p-0 mb-0">Vendas Efetuadas Hoje:</p>
+                    <p class="fw-bold fs-4" id="txt-venda">2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid m-0 p-4 border rounded bg-white">
+            <h2 id="borda-esquerda">Vendas Mensais</h2>
+            <p> Quantitativo de produtos vendidos e serviços prestados esse mês</p>
+            <canvas id="grafico"> </canvas>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade"
+        id="abrir_caixa"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Abrir Caixa
+                </h1>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 mb-2 mt-2">
+                        <label for="nome" class="mb-1"> Funcionário:</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="nome" class="mb-1"> Data:</label>
+                        <input type="date" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label for="nome" class="mb-1"> Horário:</label>
+                        <input type="time" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-2 mt-2">
+                        <label for="nome" class="mb-1">
+                            Saldo de abertura do Caixa:
+                        </label>
+                        <input type="text" class="form-control" placeholder="R$00,00" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="buttons">
+                    <button type="button"
+                            class="btn-cancelar"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button"
+                            class="btn-salvarCai"
+                            id="salvar-caixa"
+                            data-bs-dismiss="modal">
+                        Salvar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let statusCaixa = false;
+    const btnStatus = document.getElementById("btn-status");
+    const btnSalvarCaixa = document.getElementById("salvar-caixa");
+    const btnCaixa = document.getElementById("btn-caixa");
+
+    btnSalvarCaixa.addEventListener("click", () => {
+        if (!statusCaixa) {
+            btnStatus.textContent = "● Status: Fechado";
+            btnStatus.style.cssText = "color: #be0000; border: 2px solid #be0000";
+            btnCaixa.textContent = "Fechar Caixa";
+            statusCaixa = true;
+        } else {
+            btnStatus.textContent = "● Status: Aberto";
+            btnStatus.style.cssText = "color: green; border: 2px solid green";
+            btnCaixa.textContent = "Abrir Caixa";
+            statusCaixa = false;
+        }
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('grafico');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+            datasets: [
+                {
+                    label: 'Produtos vendidos',
+                    data: [120, 190, 30, 59, 29],
+                    backgroundColor: '#0dcaf0'
+                },
+                {
+                    label: 'Serviços ofertados',
+                    data: [80, 110, 70, 60, 49],
+                    backgroundColor: '#343a40'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+</script>

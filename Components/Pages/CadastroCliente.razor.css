@@ -27,12 +27,6 @@ a > span {
 .breadcrumb {
     background: none;
 }
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 16px;
-}
 
 input, select, textarea {
     width: 100%;
@@ -44,6 +38,12 @@ input, select, textarea {
     box-sizing: border-box;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 16px;
+}
 .btn-salvar {
     background-color: #21B570;
     color: white;

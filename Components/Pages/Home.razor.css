@@ -1,0 +1,91 @@
+﻿#borda-esquerda {
+    border-left: 4px solid #666;
+    padding-left: 10px;
+}
+
+.ponto {
+    background-color: green;
+    width: 12px;
+    height: 12px;
+    color: green;
+    border-radius: 100%;
+}
+
+.icon-img {
+    background-color: #0dcaf0;
+    width: 6em;
+    height: 6em;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status_est {
+    background-color: #e5e8eb;
+    color: green;
+    border: 2px solid green;
+    font-size: 1em;
+    font-weight: 700;
+    margin: 0;
+    cursor: default;
+    padding: 8px 12px;
+    border-radius: 100px;
+    width: 10em;
+}
+
+.btn-ca {
+    width: 10em;
+    background: #0dcaf0;
+    border: none;
+    padding: 8px 12px;
+    font-weight: 700;
+    border-radius: 8px;
+    color: white !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    gap: 16px;
+}
+
+.btn-salvarCai {
+    background-color: #21B570;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cancelar {
+    text-align: center;
+    background-color: #C82333;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 50%;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-cancelar:hover {
+        background-color: #B6202E;
+    }
+
+.btn-salvarCai:hover {
+    background-color: #1EA465;
+}
