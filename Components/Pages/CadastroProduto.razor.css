@@ -76,9 +76,9 @@ input, select, textarea {
     transition: background-color 0.3s ease;
 }
 
-.btn-deletar:hover {
-    background-color: #B6202E;
-}
+    .btn-deletar:hover {
+        background-color: #B6202E;
+    }
 
 .btn-salvar:hover {
     background-color: #1EA465;
@@ -88,3 +88,5 @@ input, select, textarea {
     border-top: 1px solid #ccc;
     margin: 15px 0;
 }
+
+esse
