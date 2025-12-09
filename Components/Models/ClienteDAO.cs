@@ -2,6 +2,9 @@
 using AppBugaoMotoFVLE.Configs;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing;
+using MySqlX.XDevAPI;
+using Org.BouncyCastle.Tls;
+using System.Data;
 using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 
@@ -125,5 +128,6 @@ public class ClienteDAO
             throw;
         }
     }
+
 }
 

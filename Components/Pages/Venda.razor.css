@@ -1,0 +1,22 @@
+﻿.breadcrumb-item > a {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #212529;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb {
+    background: none;
+}
+
+a > span {
+    color: #0dcaf0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.borda-esquerda {
+    border-left: 4px solid #666;
+    padding-left: 12px;
+}

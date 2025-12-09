@@ -16,6 +16,7 @@ builder.Services.AddScoped<ClienteDAO>();
 
 builder.Services.AddScoped<ProdutoDAO>(); // ✅ ADICIONE ESTA LINHA
 builder.Services.AddScoped<ServicoDAO>(); // ✅ ADICIONE ESTA LINHA
+builder.Services.AddScoped<CaixaDAO>();
 
 
 // builder.Services.AddScoped<ProdutoDAO>();

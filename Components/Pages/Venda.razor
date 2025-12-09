@@ -1,7 +1,41 @@
 ﻿@page "/venda"
+@using AppBugaoMotoFVLE.Components.Models;
+@inject ClienteDAO clienteDAO
 
-<div class="container-md pt-4 d-grid gap-4 bg-white">
-    <h1 class="border-start ps-4"> Venda </h1>
+<style>
+    .breadcrumb-item > a {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #212529;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .breadcrumb {
+        background: none;
+    }
+
+    .a-venda {
+        color: #0dcaf0 !important;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #borda-esquerda {
+        border-left: 4px solid #666;
+        padding-left: 12px;
+    }
+    .nav-link {
+        color: gray;
+    }
+</style>
+
+<ol class="breadcrumb p-0">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="a-venda"> Venda  </a></li>
+</ol>
+
+    <h1 id="borda-esquerda" class="mb-3"> Venda </h1>
     <div class="container-fluid p-0">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -20,10 +54,10 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" id="MeuConteudo">
+        <div class="tab-content bg-white" id="MeuConteudo">
             <div id="AdicionarServico" class="tab-pane fade show active border" role="tabpanel" aria-labelledby="linkServico"> <br>
                 <div class="p-4 d-grid gap-4 pt-2">
-                    <div class="border-start ps-4">
+                    <div id="borda-esquerda">
                         <h2>Adicionar Serviços</h2>
                         <p> Selecione o tipo de serviço prestado, caso não tenha deixe em branco</p>
                     </div>
@@ -141,21 +175,10 @@
                             <div class="col-4">
                                 <label for="SelectClientes" class="form-label">Selecione o Cliente</label>
                                 <select name="NomeCliente" class="form-select" id="SelecionarCliente">
-                                    <option value="1">João</option>
-                                    <option value="2">Maria</option>
-                                    <option value="3">Viviane</option>
+                                    @foreach(var opcao in listaCli){
+                                        <option value="@opcao.Id"> @opcao.Nome</option>
+                                    }
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <input class="form-control" type="text" placeholder="Telefone" aria-label="Disabled input example" disabled>
-                            </div>
-                            <div class="col-4">
-                                <input class="form-control" type="text" placeholder="CPF" aria-label="Disabled input example" disabled>
-                            </div>
-                            <div class="col-4">
-                                <input class="form-control" type="text" placeholder="Endereço" aria-label="Disabled input example" disabled>
                             </div>
                         </div>
                     </div>
@@ -203,4 +226,20 @@
         </div>
 
     </div>
-</div>
+
+
+@code{
+    private string erro = string.Empty;
+
+    [SupplyParameterFromForm]
+    private Cliente cliente { get; set; } = new();
+    private List<Cliente> listaCli = new();
+
+    protected override void OnInitialized(){
+        CarregarNomes();
+    }
+
+    private void CarregarNomes(){
+        listaCli = clienteDAO.ListarCliente();
+    }
+}

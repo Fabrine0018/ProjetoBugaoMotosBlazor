@@ -42,10 +42,18 @@ prestador_ser varchar (300),
 valor_ser double
 );
 
-
-create table venda(
+create table Venda(
 id_ven int primary key auto_increment,
 data_ven varchar (300),
 valor_total_ven varchar (300)
 );
-bd_bugaomotos_ofici
+
+create table caixa (
+id_cai int primary key auto_increment not null,
+data_cai date,
+hora_aberto_cai time,
+funcionario_cai varchar(300),
+hora_fechado_cai time,
+saldo_aberto_cai float,
+saldo_fechado_cai float
+);
