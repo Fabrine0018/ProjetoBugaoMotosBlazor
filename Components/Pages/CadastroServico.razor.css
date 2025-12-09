@@ -12,17 +12,22 @@
 }
 
 .breadcrumb {
-    font-size: 14px;
-    color: #333;
+    background: none;
+    font-size: 16px;
     margin-bottom: 10px;
 }
 
     .breadcrumb a {
-        color: #1a0dab;
+        color: #212529;
         text-decoration: none;
+        font-weight: 500;
     }
 
-
+a > span {
+    color: #0dcaf0;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 .container {
     border: 2px solid rgb(180, 180, 180);
@@ -36,6 +41,8 @@
     .container h2 {
         margin-top: 0;
         font-size: 22px;
+        border-left: 4px solid #666;
+        padding-left: 10px;
     }
 
     .container p {
@@ -45,6 +52,7 @@
     }
 
 input, select, textarea {
+    height: 46px;
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -54,51 +62,64 @@ input, select, textarea {
     box-sizing: border-box;
 }
 
-.row {
+.row, .row-3 {
     display: flex;
     gap: 15px;
 }
 
-    .row > div {
-        flex: 1;
-    }
-
-.row-3 {
-    display: flex;
-    gap: 15px;
-}
-
+    .row > div,
     .row-3 > div {
         flex: 1;
     }
 
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+    background-color: #fff;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
 .buttons {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     margin-top: 20px;
 }
 
 .btn-salvar {
-    background-color: #009e0f;
+    background-color: #21B570;
     color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    width: 48%;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 50%;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+    .btn-salvar:hover {
+        background-color: #1EA465;
+    }
+
 .btn-deletar {
-    background-color: #e53935;
+    background-color: #C82333;
     color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    width: 48%;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 50%;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+    .btn-deletar:hover {
+        background-color: #B6202E;
+    }
 
 .divider {
     border-top: 1px solid #ccc;

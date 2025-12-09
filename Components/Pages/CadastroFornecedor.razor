@@ -39,17 +39,19 @@
             <div>
                 <input @bind-value="_novoFornecedor!.Cidade" type="text" placeholder="Cidade">
             </div>
-        </div>
-        <input @bind-value="_novoFornecedor!.Complemento" type="text" placeholder="Complemento">
-        <div class="row">
             <div><input @bind-value="_novoFornecedor!.Rua" type="text" placeholder="Rua"></div>
             <div><input @bind-value="_novoFornecedor!.Bairro" type="text" placeholder="Bairro"></div>
         </div>
-       
-        <div class="buttons">
-            <button type="submit" class="btn-salvar">Salvar</button>
-            <button class="btn-deletar">Deletar</button>
+        <div>
+            <input @bind-value="_novoFornecedor!.Complemento" type="text" placeholder="Complemento">
         </div>
+
+
+        <div class="grupo-botao justify-content-start">
+            <button type="submit" class="btn-salvar">Salvar</button>
+            <a href="/ConsultaProduto" class="btn-deletar">Cancelar</a>
+        </div>
+
 
     </EditForm>
 </div>
