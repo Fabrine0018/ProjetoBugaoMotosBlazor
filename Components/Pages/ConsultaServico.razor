@@ -4,16 +4,16 @@
 @inject ServicoDAO servicoDAO
 @inject NavigationManager navigation
 
-<div class="breadcrumb">
-    <a href="/"> Home </a> • <a>Consultar Serviço</a>
-</div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Consultar: <span> Servico </span> </a></li>
+</ol>
 
 <div class="border p-4 rounded bg-white">
     <h2>Consultar Serviço 🔍</h2>
     <div class="search-bar">
         <input type="text" placeholder="Buscar">
-        <button class="btn btn-filter"> Filtrar</button>
-        <a href="/CadastroServico" class="btn btn-add"> Adicionar Novo Serviço</a>
+        <a href="/CadastroServico" class=" btn-add"> + Servico</a>
     </div>
     <table>
         <thead>
@@ -40,7 +40,7 @@
                             </a>
 
                             <a href="/Atualizar-servico-@servico.Id" class="btn btn-info">
-                                <i class="bi bi-eye-fill text-white"></i>
+                                <i class="bi bi-pencil-square text-white"></i>
                             </a>
 
                             <a data-bs-toggle="modal" data-bs-target="#excluir-@servico.Id" class="btn btn-danger">

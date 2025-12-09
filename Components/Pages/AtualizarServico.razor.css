@@ -1,0 +1,76 @@
+﻿.borda-esquerda {
+    border-left: 4px solid #666;
+    padding-left: 10px;
+}
+
+.breadcrumb-item > a {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #212529;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb {
+    background: none;
+}
+
+a > span {
+    color: #0dcaf0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    height: 46px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn-salvar {
+    background-color: #21B570;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-deletar {
+    text-align: center;
+    background-color: #C82333;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 50%;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-deletar:hover {
+        background-color: #B6202E;
+    }
+
+.btn-salvar:hover {
+    background-color: #1EA465;
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+}

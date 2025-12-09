@@ -4,17 +4,18 @@
 @inject FornecedorDAO fornecedorDAO
 @inject NavigationManager Navigation;
 
-<div class="breadcrumb">
-    <a href="/"> Home </a> • <a> Consultar Fornecedor </a>
-</div>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Consultar: <span> Fornecedor </span> </a></li>
+</ol>
 
 <div class="border p-4 rounded bg-white">
     <h2>Consultar Fornecedor 🔍</h2>
 
     <div class="search-bar mb-3 d-flex gap-2">
         <input type="text" placeholder="Buscar" class="form-control" />
-        <button class="btn btn-filter"> Filtrar</button>
-        <a href="/CadastroFornecedor" class="btn btn-add"> Adicionar novo fornecedor</a>
+        <a href="/CadastroFornecedor" class=" btn-add"> + Fornecedor</a>
     </div>
 
     <table class="table table-striped">
@@ -42,16 +43,14 @@
                                 <i class="bi bi-eye-fill text-white"></i>
                             </a>
 
-                            <a href="/Atualizar-Fornecedor-@fornecedor.Id" class="btn btn-info">
-                               <i class="bi bi-eye-fill text-white"></i>
-                            </a>
+                            <a href="/Atualizar-Fornecedor-@fornecedor.Id" class="btn btn-info"> <i class="bi bi-pencil-square text-white"></i> </a>   
 
-                            <a data-bs-toggle="modal" data-bs-target="#excluir-@fornecedor.Id"
-                                class="btn btn-danger">
-                                <i class="bi bi-eye-fill text-white"></i>
-                            </a>
+                            <a data-bs-toggle="modal" data-bs-target="#excluir-@fornecedor.Id" class="btn btn-danger"> <i class="bi bi-trash3-fill text-white"></i> </a>
                         </td>
-                    </tr>
+                   </tr>
+
+                        
+                           
 
                     contador++;
                 }

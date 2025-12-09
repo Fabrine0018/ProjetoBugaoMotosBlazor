@@ -12,11 +12,12 @@
     </div>
 }
 
-    <div class="breadcrumb ">
-        <a href="#">Home</a> > <a href="#">Cadastrar: Fornecedor</a>
-    </div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Cadastrar: <span> Fornecedor </span> </a></li>
+</ol>
 <div class="border p-4 rounded bg-white">
-    <div class="border-left">
+    <div class="borda-esquerda">
         <h3>Cadastro do fornecedor</h3>
         <p>Preencha todas as informações corretamente</p>
     </div>
@@ -46,12 +47,11 @@
             <input @bind-value="_novoFornecedor!.Complemento" type="text" placeholder="Complemento">
         </div>
 
-
-        <div class="grupo-botao justify-content-start">
+        <div class="buttons">
             <button type="submit" class="btn-salvar">Salvar</button>
-            <a href="/ConsultaProduto" class="btn-deletar">Cancelar</a>
-        </div>
+            <button class="btn-deletar">Cancelar</button>
 
+        </div>
 
     </EditForm>
 </div>

@@ -1,0 +1,143 @@
+﻿.borda-esquerda {
+    border-left: 4px solid #666;
+    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    background: none;
+    margin-bottom: 15px;
+}
+
+.breadcrumb-item > a {
+    font-size: 16px;
+    color: #212529;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a > span {
+    color: #0dcaf0;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid #666;
+    padding-left: 12px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+    .search-bar input {
+        flex: 1;
+        height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+
+        .search-bar input:focus {
+            border-color: #0dcaf0;
+            box-shadow: 0 0 5px #0dcaf0aa;
+        }
+
+/* Botão de adicionar escuro */
+.btn-add {
+    background: #0d1b2a;
+    text-decoration: none;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s;
+}
+
+    .btn-add:hover {
+        background: #0b1520;
+    }
+
+/* Botão de filtrar azul-escuro (usa a mesma ideia do .btn-view ou input[type=submit]) */
+.search-bar button,
+.search-bar .btn-filter {
+    background: #0d1b2a;
+    border: none;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+    .search-bar button:hover,
+    .search-bar .btn-filter:hover {
+        background: #0b1520;
+    }
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+    table thead {
+        background: #343a40;
+        color: white;
+        font-size: 15px;
+    }
+
+    table th, table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    table tbody tr {
+        transition: 0.25s;
+    }
+
+        table tbody tr:hover {
+            background: #f1f1f1;
+        }
+
+    table th {
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+.btn-view {
+    background: #2c3e50;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+    .btn-view:hover {
+        background: #1a242f;
+    }

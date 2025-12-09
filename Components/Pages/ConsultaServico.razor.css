@@ -79,11 +79,21 @@ h2 {
     }
 
 .btn-add {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s;
     background: #34495e;
+    text-decoration: none;
 }
 
     .btn-add:hover {
         background: #22313f;
+        text-decoration: none;
     }
 
 table {

@@ -12,12 +12,15 @@
     @erro
 </div>
 }
-<div class="breadcrumb">
-    <a href="#">Home</a> > <a href="#">Cadastrar: Serviço</a>
-</div>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"> Início </a> </li> <!-- Inicio é Home-->
+    <li class="breadcrumb-item active"> <a class="active"> Cadastrar: <span> Servico </span> </a></li>
+</ol>
 
 <div class="border p-4 rounded bg-white">
-    <div class="border-left">
+
+
+    <div class="borda-esquerda">
         <h3>Cadastro do serviço</h3>
         <p>Preencha todas as informações corretamente</p>
     </div>
@@ -29,7 +32,7 @@
             <div><input @bind-value="_novoServico!.Valor"  type="text" placeholder="Valor do Serviço"></div>
     </div>
 
-        <input rows="4" placeholder="Descrição"></input>
+        <input rows="4" placeholder="Descrição">
     <div class="buttons">
         <button type="submit" class="btn-salvar">Salvar</button>
         <button class="btn-deletar">Deletar</button>
